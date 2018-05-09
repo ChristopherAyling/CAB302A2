@@ -1,0 +1,14 @@
+package Stock;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class ItemTests {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}
