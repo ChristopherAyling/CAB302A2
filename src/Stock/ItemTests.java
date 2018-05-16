@@ -59,6 +59,12 @@ public class ItemTests {
 		assertEquals(temp, item.getTemp());
 	}
 	
+	@Test
+	public void getTempNoTempTest() {
+		Item item = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount);
+		assertEquals(temp, 10);
+	}
+	
 	@Test 
 	private void equalsTest() {
 		Item item1 = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);

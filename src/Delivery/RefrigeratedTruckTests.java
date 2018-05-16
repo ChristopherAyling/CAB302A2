@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class RefrigeratedTruckTests {
 
-	private Truck truck;
+	private RefrigeratedTruck truck;
 
 	@Test
 	public void testConstruction() {
@@ -17,7 +17,7 @@ public class RefrigeratedTruckTests {
 	public void testCargoMaxCapacity() {
 		truck = new RefrigeratedTruck();
 		
-		AssetEquals(truck.cargoMaxCapacity, 800);
+		AssetEquals(RefrigeratedTruck.cargoMaxCapacity, 800);
 	}
 	
 	@Test
@@ -40,7 +40,7 @@ public class RefrigeratedTruckTests {
 		
 		cargo = new Stock();
 		
-		for(int i = 0; i <= truck.cargoMaxCapacity; i++) {
+		for(int i = 0; i <= truck.getCargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
 		
@@ -63,20 +63,20 @@ public class RefrigeratedTruckTests {
 		
 		Stock cargo = new Stock();
 		
-		for(int i = 0; i < truck.cargoMaxCapacity; i++) {
+		for(int i = 0; i < RefrigeratedTruck.cargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
 		
 		truck.loadCargo(cargo);
 		
-		AssertEquals(truck.cargo(), cargo);
+		assertEquals(truck.getCargo(), cargo);
 	}
 	
 	@Test
 	public void testTemperature() {
 		truck = new RefrigeratedTruck();
 		
-		AssetEquals(truck.temperature(), 10);  // base/high temperature
+		assertEquals(truck.temperature(), 10);  // base/high temperature
 		
 		Stock cargo = new Stock();
 		
@@ -84,14 +84,14 @@ public class RefrigeratedTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		AssetEquals(truck.temperature(), -20);  // low temperature
+		assertEquals(truck.temperature(), -20);  // low temperature
 	}
 	
 	@Test
 	public void testCargoCurrentCapacity() {	
 		truck = new RefrigeratedTruck();
 		
-		AssertEquals(truck.cargoCurrentCapacity(), 800);  // when empty
+		assertEquals(truck.getCargoCurrentCapacity(), 800);  // when empty
 		
 		Stock cargo = new Stock();
 		
@@ -101,14 +101,14 @@ public class RefrigeratedTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		AssertEquals(truck.cargoCurrentCapacity(), 800 - 500);  // when containing
+		assertEquals(truck.getCargoCurrentCapacity(), 800 - 500);  // when containing
 	}
 	
 	@Test
 	public void testCost() {
 		truck = new RefrigeratedTruck();
 		
-		AssertEquals(truck.cost(), 900);  // when empty
+		AssertEquals(truck.getCost(), 900);  // when empty
 		
 		Stock cargo = new Stock();
 		
@@ -118,7 +118,7 @@ public class RefrigeratedTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		AssertEquals(truck.cost(), 900 + 200 * java.lang.Math.pow(0.7, truck.temperature() / 5));  // when containing
+		assertEquals(truck.getCost(), 900 + 200 * java.lang.Math.pow(0.7, truck.getTemperature() / 5));  // when containing
 	}
 
 }

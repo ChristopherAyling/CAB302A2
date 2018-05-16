@@ -13,8 +13,9 @@ public class StockTests {
 	Item noTempItem1 = new Item("Canned Tomatoes", 12.3, 9, 56, 89);
 	Item noTempItem2 = new Item("Table salt", 12.3, 9, 56, 89);
 	
-	Item tempItem1 = new Item("Cold Magical Elixir", 12.3, 9, 56, 89, 2);
-	Item tempItem2 = new Item("Cool Cucumber", 777.777, 892.1, 4, 5, -18);
+	Item tempItem1 = new Item("Cold Magical Elixir", 12.3, 9, 56, 89, 2.0);
+	Item tempItem2 = new Item("Cool Cucumber", 777.777, 892.1, 4, 5, -18.1);
+	Item tempItem3 = new Item("Too Cold Tomato", 18.2, 19.1, 66, 99, -498.3);
 
 	
 	@Before
@@ -83,5 +84,29 @@ public class StockTests {
 	public void removeTest() {
 		stock.add(testItem1);
 		stock.remove(testItem1.getName());
+	}
+	
+	@Test
+	public void getColdestItemNoItemsTest() {
+		assertEquals(stock.getColdestItemTemp(), 10.0);
+	}
+	
+	@Test
+	public void getColdestItemDryGoodsTest() {
+		stock.add(noTempItem1);
+		assertEquals(stock.getColdestItemTemp(), noTempItem1.getTemp());
+	}
+	
+	@Test
+	public void getColdestItemTest() {
+		stock.add(tempItem1);
+		stock.add(tempItem2);
+		assertEquals(stock.getColdestItemTemp(), tempItem2.getTemp());
+	}
+	
+	@Test
+	public void getColdestItemTooColdTest() {
+		stock.add(tempItem3);
+		assertEquals(stock.getColdestItemTemp(), tempItem3.getTemp());
 	}
 }

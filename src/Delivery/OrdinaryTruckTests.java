@@ -8,7 +8,7 @@ import Stock.Item;
 
 public class OrdinaryTruckTests {
 	
-	private Truck truck;
+	private OrdinaryTruck truck;
 
 	@Test
 	public void testConstruction() {
@@ -19,7 +19,7 @@ public class OrdinaryTruckTests {
 	public void testCargoMaxCapacity() {
 		truck = new OrdinaryTruck();
 		
-		AssetEquals(truck.cargoMaxCapacity, 1000);
+		assertEquals(OrdinaryTruck.cargoMaxCapacity, 1000);
 	}
 	
 	@Test
@@ -30,7 +30,7 @@ public class OrdinaryTruckTests {
 		
 		Stock cargo = new Stock();
 		
-		for(int i = 0; i < truck.cargoMaxCapacity; i++) {
+		for(int i = 0; i < OrdinaryTruck.cargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
 		
@@ -42,7 +42,7 @@ public class OrdinaryTruckTests {
 		
 		cargo = new Stock();
 		
-		for(int i = 0; i <= truck.cargoMaxCapacity; i++) {
+		for(int i = 0; i <= OrdinaryTruck.cargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
 		
@@ -65,13 +65,13 @@ public class OrdinaryTruckTests {
 		
 		Stock cargo = new Stock();
 		
-		for(int i = 0; i < truck.cargoMaxCapacity; i++) {
+		for(int i = 0; i < OrdinaryTruck.cargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
 		
 		truck.loadCargo(cargo);
 		
-		AssertEquals(truck.cargo(), cargo);
+		assertEquals(truck.getCargo(), cargo);
 		
 	}
 	
@@ -79,7 +79,7 @@ public class OrdinaryTruckTests {
 	public void testCargoCurrentCapacity() {	
 		truck = new OrdinaryTruck();
 		
-		AssertEquals(truck.cargoCurrentCapacity(), 1000);  // when empty
+		assertEquals(truck.getCargoCurrentCapacity(), 1000);  // when empty
 		
 		Stock cargo = new Stock();
 		
@@ -89,14 +89,15 @@ public class OrdinaryTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		AssertEquals(truck.cargoCurrentCapacity(), 1000 - 500);  // when containing
+		assertEquals(truck.getCargoCurrentCapacity(), 1000 - 500);  // when containing
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testCost() {
 		truck = new OrdinaryTruck();
 		
-		AssertEquals(truck.cost(), 750);  // when empty
+		assertEquals(truck.getCost(), 750.0);  // when empty
 		
 		Stock cargo = new Stock();
 		
@@ -106,7 +107,7 @@ public class OrdinaryTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		AssertEquals(truck.cost(), 750 + 0.25 * 500);  // when containing
+		assertEquals(truck.getCost(), 750 + (0.25 * 500));  // when containing
 	}
 
 }

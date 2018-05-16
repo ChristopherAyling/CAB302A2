@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.sun.org.apache.xml.internal.security.signature.Manifest;
-
 import java.util.*;
 
 public class ManifestTests {
