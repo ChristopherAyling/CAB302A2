@@ -3,6 +3,7 @@
  */
 package Delivery;
 
+
 /**
  * @author Chris
  *
@@ -10,7 +11,6 @@ package Delivery;
 public class OrdinaryTruck extends Truck {
 
 	public static final int cargoMaxCapacity = 1000;
-	private Stock cargo;
 	
 	public OrdinaryTruck() {
 		

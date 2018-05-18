@@ -1,5 +1,7 @@
 package Delivery;
 
+import Stock.Stock;
+
 public abstract class Truck {
 	private Stock cargo;
 	

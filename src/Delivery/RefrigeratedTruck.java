@@ -10,7 +10,6 @@ package Delivery;
 public class RefrigeratedTruck extends Truck {
 
 	public int cargoMaxCapacity = 800;
-	private Stock cargo;
 	
 	public RefrigeratedTruck() {
 	}
