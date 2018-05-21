@@ -50,6 +50,14 @@ public class StoreTests {
 	}
 	
 	@Test
+	public void displayCapitalTest() {
+		// test displaying 
+		store.setCapital(100000.0);
+		assertEquals(store.displayCapital(), "$100,000.00");
+		store.setCapital()
+	}
+	
+	@Test
 	public void InventoryTest() {
 		store.getInventory();
 	}
