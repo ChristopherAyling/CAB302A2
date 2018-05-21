@@ -4,6 +4,10 @@
 package GUI;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.EventListener;
+
 import javax.swing.*;
 
 /**
@@ -38,9 +42,42 @@ public class UserInterface {
         
         //add buttons
         JButton loadItemPropertiesButton = new JButton("Load Item Properties");
+        loadItemPropertiesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Load Item Properties
+				System.out.println("Item properties button clicked");				
+			}
+		});
+        
         JButton exportManifestButton = new JButton("Export Manifest");
+        exportManifestButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Export Manifest
+				System.out.println("Export manifest button clicked");
+			}
+		});
+        
         JButton loadManfestButton = new JButton("Load Manifest");
+        loadManfestButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Load Manifest
+				System.out.println("Load manifest button clicked");
+			}
+		});
+        
         JButton loadSalesLogButton = new JButton("Load Sales Log");
+        loadSalesLogButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Load Sales
+				System.out.println("Load Sales Log button clicked");
+			}
+		});
+        
         topPanel.add(loadItemPropertiesButton);
         topPanel.add(exportManifestButton);
         topPanel.add(loadManfestButton);
