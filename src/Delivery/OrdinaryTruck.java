@@ -22,12 +22,26 @@ public class OrdinaryTruck extends Truck {
 	 * an exception as refrigerated items may not be held by an OrdinaryTruck.
 	 */
 	public void loadCargo(Stock stock) throws DeliveryException {
+		for (Item item : stock) {
+			loadCargo(item);
+		}
+	}
+	
+	/**
+	 * Load an item into the truck. If the item requires refrigeration, raise
+	 * an exception as refigerated items may not be held by and OrdinaryTruck.
+	 */
+	public void loadCargo(Item item) throws DeliveryException {
 		if (stock.requiresRefrigeration) {
 			throw new DeliveryException();
 		} else {
-			for (Item item : stock) {
-				cargo.add(item);
-			}
+			cargo.add(item);
+		}
+	}
+	
+	public void loadCargo(Item item, int quantity) throws DeliveryException {
+		for (int i=0; i < quantity; i++) {
+			loadCargo(item);
 		}
 	}
 	
@@ -46,7 +60,7 @@ public class OrdinaryTruck extends Truck {
 	}
 
 	public String getTypeToString() {
-		return "Ordinarys";
+		return "Ordinary";
 	}
 	
 	

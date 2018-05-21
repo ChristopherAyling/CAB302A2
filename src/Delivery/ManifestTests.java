@@ -2,6 +2,7 @@ package Delivery;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -9,6 +10,11 @@ import java.util.*;
 public class ManifestTests {
 
 	private Manifest truckCollection;
+	
+	@Before
+	public void setUp() {
+		truckCollection = new Manifest();
+	}
 
 	@Test
 	public void testConstruction() {
@@ -34,6 +40,15 @@ public class ManifestTests {
 		
 		truckCollection.add(truck);
 		assertEquals(truckCollection.trucks().get(0), truck);
+	}
+	
+	@Test
+	public void getCostTest() {
+		//create trucks
+		
+		// calculate expected price
+		
+		// compare prices
 	}
 
 }
