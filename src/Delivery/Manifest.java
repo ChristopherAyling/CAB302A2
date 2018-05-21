@@ -1,4 +1,6 @@
-/**
+/** Manifest.java
+ * 
+ * A collection of Trucks.
  * 
  */
 package Delivery;

@@ -1,21 +1,43 @@
+/** Truck.java
+ * 
+ * Truck abstract class.
+ * 
+ * Used 
+ * 
+ */
 package Delivery;
 
-import Stock.Stock;
+import Stock.*;
 
 public abstract class Truck {
-	private Stock cargo;
+	private Stock cargo = new Stock();
 	
-	public void loadCargo(Stock stock) {
-		this.cargo =  stock;
-	}
+	/**
+	 * Load cargo into the Truck.
+	 *
+	 * @param stock
+	 */
+	public abstract void loadCargo(Stock stock);
 	
-	public Stock getCargo(Stock stock) {
+	/**
+	 * Returns the cargo held in the Truck
+	 * 
+	 * @return cargo
+	 */
+	public Stock getCargo() {
 		return cargo;
 	}
 	
+	/**
+	 * 
+	 * @return Amount of items in the truck
+	 */
 	public int getCargoCurrentCapacity() { 
 		return cargo.count();
 	}
 	
-	public abstract double getcost();
+	/**
+	 * @return Cost of Truck in Dollars
+	 */
+	public abstract double getCost();
 }
