@@ -53,5 +53,9 @@ public class RefrigeratedTruck extends Truck {
 	public double getTemperature(){
 		return this.cargo.getColdestItemTemp();
 	}
+	
+	public String getTypeToString() {
+		return "Refrigerated";
+	}
 
 }

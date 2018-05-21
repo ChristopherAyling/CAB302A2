@@ -40,4 +40,9 @@ public abstract class Truck {
 	 * @return Cost of Truck in Dollars
 	 */
 	public abstract double getCost();
+	
+	/**
+	 * @return Type of truck.
+	 */
+	public abstract String getTypeToString();
 }

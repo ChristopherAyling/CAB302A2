@@ -109,4 +109,16 @@ public class StockTests {
 		stock.add(tempItem3);
 		assertEquals(stock.getColdestItemTemp(), tempItem3.getTemp());
 	}
+	
+	@Test
+	public void getQuantityTest() {
+		assertEquals(0, stock.getQuantity(tempItem1.getName()));
+		stock.add(tempItem1);
+		assertEquals(1, stock.getQuantity(tempItem1.getName()));
+		stock.add(tempItem1);
+		assertEquals(2, stock.getQuantity(tempItem1.getName()));
+		stock.add(noTempItem1);
+		assertEquals(1, stock.getQuantity(noTempItem1.getName()));
+		assertEquals(0, stock.getQuantity("some random other item"));
+	}
 }

@@ -28,13 +28,12 @@ public class ManifestTests {
 	public void testTrucks() {
 		truckCollection = new Manifest();
 		
-		AssertEquals(truckCollection.trucks(), Collections.emptyList());
+		assertEquals(truckCollection.trucks(), Collections.emptyList());
 		
 		Truck truck = new OrdinaryTruck();
 		
 		truckCollection.add(truck);
-		
-		AssertEquals(truckCollection.trucks().get(0), truck);
+		assertEquals(truckCollection.trucks().get(0), truck);
 	}
 
 }

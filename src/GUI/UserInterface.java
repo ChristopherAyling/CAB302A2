@@ -70,7 +70,12 @@ public class UserInterface {
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Export Manifest
+				// TODO Create an optimised manifest object from current inventory.
+				
+				// TODO User selects location to save manifest to.
+				
+				// TODO Write manifest to CSV and save to location.
+				
 				System.out.println("Export manifest button clicked");
 			}
 		});
@@ -83,7 +88,14 @@ public class UserInterface {
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Load Manifest
+				// TODO User selects file to load manifest from.
+				
+				// TODO Read CSV and create manifest object.
+				
+				// TODO Decrease capital based on item costs in manifest.
+				
+				// TODO Increase inventory based on item in manifest.
+				
 				System.out.println("Load manifest button clicked");
 			}
 		});
@@ -103,7 +115,7 @@ public class UserInterface {
         
         topPanel.add(loadItemPropertiesButton);
         topPanel.add(exportManifestButton);
-        topPanel.add(loadManfestButton);
+        topPanel.add(loadManifestButton);
         topPanel.add(loadSalesLogButton);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         

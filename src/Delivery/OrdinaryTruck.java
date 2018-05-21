@@ -45,4 +45,10 @@ public class OrdinaryTruck extends Truck {
 		return 750.0 + (0.25*this.getCargoCurrentCapacity());
 	}
 
+	public String getTypeToString() {
+		return "Ordinarys";
+	}
+	
+	
+
 }
