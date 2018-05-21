@@ -51,10 +51,25 @@ public class StoreTests {
 	
 	@Test
 	public void displayCapitalTest() {
-		// test displaying 
-		store.setCapital(100000.0);
-		assertEquals(store.displayCapital(), "$100,000.00");
-		store.setCapital()
+		// test displaying starting capital
+		store.setCapital(100000);
+		assertEquals("$100,000.00", store.displayCapital());
+		// test negative
+		store.setCapital(-10.57)
+		assertEquals("$-10.57", store.displayCapital());
+		// test 0
+		store.setCapital(0);
+		assertEquals("$0.00", store.displayCapital());
+		// test rounding
+		store.setCapital(1.1111111); // should round down
+		assertEquals("$1.10", store.displayCapital());
+		
+		store.setCapital(1.99999999); // should round up
+		assertEquals("$2.00", store.displayCapital());
+		
+		// test comma seperation
+		store.setCapital(1000000000);
+		assertEquals("$1,000,000,000.00", store.displayCapital());
 	}
 	
 	@Test
