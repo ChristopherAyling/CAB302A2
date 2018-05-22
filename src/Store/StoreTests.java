@@ -1,5 +1,8 @@
 package Store;
 
+import Stock.*;
+import Delivery.*;
+
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -76,4 +79,5 @@ public class StoreTests {
 	public void InventoryTest() {
 		store.getInventory();
 	}
+	
 }

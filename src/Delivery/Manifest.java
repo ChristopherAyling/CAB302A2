@@ -44,7 +44,6 @@ public class Manifest {
 	 * @param path path to a file containing manifest data.
 	 */
 	public Manifest(String path) throws IOException{
-		// create empty stock object
 		Truck truck;
 		Item item;
 		
@@ -63,6 +62,8 @@ public class Manifest {
 				String[] values = line.split(",");
 				// get item name
 				String name = values[0];
+				// create Item instance
+				Item item = new Item()
 				// get quantity
 				int quantity = Integer.parseInt(values[1]);					
 				// add to current truck's cargo
@@ -72,15 +73,39 @@ public class Manifest {
 		}//end while
 		bufferedReader.close();
 	}
+
+	/**
+	 * Construct a manifest that minimizes the cost of reordering
+	 * the missing items.
+	 * 
+	 * @param stock which needs restocking
+	 */
+	public Manifest(Stock toRestock) {
+		// create an optimal manifest
 		
+	}
 		
-	
 	/**
 	 * Add a truck to the manifest.
 	 * @param truck
 	 */
 	public void add(Truck truck) {
 		trucks.add(truck);
+	}
+	
+
+	/**
+	 * @return a collection of strings containing the names of the items
+	 * in the trucks in the manifest.
+	 */
+	public ArrayList<String> getItems(){
+		ArrayList<String> itemNames =  new ArrayList<String>();
+		for (Truck truck : trucks) {
+			for (Item item : truck.getCargo()) {
+				itemNames.add(item.getName());
+			}
+		}
+		return itemNames;
 	}
 	
 	/**

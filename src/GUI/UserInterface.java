@@ -28,6 +28,9 @@ public class UserInterface {
 	public UserInterface() {
 	}
 	
+	/**
+	 * Create the show the graphical user interface.
+	 */
 	private static void createAndShowGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		
@@ -41,7 +44,7 @@ public class UserInterface {
         // create and add buttons to panel
         JPanel topPanel = new JPanel(new FlowLayout());
         
-        // add captial label
+        // add capital label
         JLabel capitalLabel = new JLabel("Capital: " + store.displayCapital());
         topPanel.add(capitalLabel);
         
@@ -71,10 +74,15 @@ public class UserInterface {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Create an optimised manifest object from current inventory.
+					// TODO get
 				
 				// TODO User selects location to save manifest to.
-				
+				FileDialog fd = new FileDialog(frame, "Export Manifest", FileDialog.SAVE);
+				fd.setVisible(true);
+				String path = fd.getFile();
 				// TODO Write manifest to CSV and save to location.
+				Manifest manifest = new Manifest(store.getToRestock());
+				manifest.writeToCSV(path);
 				
 				System.out.println("Export manifest button clicked");
 			}
@@ -88,15 +96,16 @@ public class UserInterface {
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Load manifest button clicked");
 				// TODO User selects file to load manifest from.
 				
-				// TODO Read CSV and create manifest object.
-				
-				// TODO Decrease capital based on item costs in manifest.
-				
+				// Read CSV and create manifest object.
+				Manifest manifest = new Manifest("TODO get path");
+				// Decrease capital based on item costs in manifest.
+				store.addCapital(-manifest.getCost());
+					// TODO update capital on GUI
 				// TODO Increase inventory based on item in manifest.
-				
-				System.out.println("Load manifest button clicked");
+				store.restock(manifest.getItems());
 			}
 		});
         
@@ -130,12 +139,13 @@ public class UserInterface {
         
         //Display the window. 
         frame.setPreferredSize(new Dimension(800, 800)); //TODO find better dimensions
-//        frame.setLocation(new Point(200, 200));
         frame.pack(); 
         frame.setVisible(true);
 	}
 
 	/**
+	 * The entry point of the program. This launches the GUI.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

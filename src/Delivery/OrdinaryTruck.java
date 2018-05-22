@@ -13,19 +13,14 @@ public class OrdinaryTruck extends Truck {
 
 	public static final int cargoMaxCapacity = 1000;
 	
+	/**
+	 * Construct an Ordinary Truck.
+	 */
 	public OrdinaryTruck() {
 		
 	}
 	
-	/**
-	 * Load stock into the truck. If an item requires refrigeration, raise
-	 * an exception as refrigerated items may not be held by an OrdinaryTruck.
-	 */
-	public void loadCargo(Stock stock) throws DeliveryException {
-		for (Item item : stock) {
-			loadCargo(item);
-		}
-	}
+	// TODO change these methods to deal with possible changes to stock.
 	
 	/**
 	 * Load an item into the truck. If the item requires refrigeration, raise
@@ -39,11 +34,23 @@ public class OrdinaryTruck extends Truck {
 		}
 	}
 	
+	/**
+	 * Load stock into the truck. If an item requires refrigeration, raise
+	 * an exception as refrigerated items may not be held by an OrdinaryTruck.
+	 */
+	public void loadCargo(Stock stock) throws DeliveryException {
+		for (Item item : stock) {
+			loadCargo(item);
+		}
+	}
+	
+	
 	public void loadCargo(Item item, int quantity) throws DeliveryException {
 		for (int i=0; i < quantity; i++) {
 			loadCargo(item);
 		}
 	}
+
 	
 	/**
 	 * Calculate and return the cost of the truck using the
@@ -58,7 +65,8 @@ public class OrdinaryTruck extends Truck {
 	public double getCost() {
 		return 750.0 + (0.25*this.getCargoCurrentCapacity());
 	}
-
+	
+	
 	public String getTypeToString() {
 		return "Ordinary";
 	}
