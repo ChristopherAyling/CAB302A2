@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.Console;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class StockTests {
@@ -88,26 +89,26 @@ public class StockTests {
 	
 	@Test
 	public void getColdestItemNoItemsTest() {
-		assertEquals(stock.getColdestItemTemp(), 10.0);
+		assertEquals(stock.getColdestItemTemperature(), 10.0);
 	}
 	
 	@Test
 	public void getColdestItemDryGoodsTest() {
 		stock.add(noTempItem1);
-		assertEquals(stock.getColdestItemTemp(), noTempItem1.getTemp());
+		assertEquals(stock.getColdestItemTemperature(), noTempItem1.getTemperature());
 	}
 	
 	@Test
 	public void getColdestItemTest() {
 		stock.add(tempItem1);
 		stock.add(tempItem2);
-		assertEquals(stock.getColdestItemTemp(), tempItem2.getTemp());
+		assertEquals(stock.getColdestItemTemperature(), tempItem2.getTemperature());
 	}
 	
 	@Test
 	public void getColdestItemTooColdTest() {
 		stock.add(tempItem3);
-		assertEquals(stock.getColdestItemTemp(), tempItem3.getTemp());
+		assertEquals(stock.getColdestItemTemperature(), tempItem3.getTemperature());
 	}
 	
 	@Test
