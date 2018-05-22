@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import Stock.Stock;
+
 public class StoreTests {
 
 	private Store store = null, store2 = null;
