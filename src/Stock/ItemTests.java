@@ -56,7 +56,7 @@ public class ItemTests {
 	@Test
 	public void getTempTest() {
 		Item item = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
-		assertEquals(temp, item.getTemperature());
+		assertTrue(temp == item.getTemperature());
 	}
 	
 	@Test

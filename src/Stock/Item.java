@@ -3,7 +3,6 @@
  */
 package Stock;
 
-import java.math.BigDecimal;
 
 public class Item {
 

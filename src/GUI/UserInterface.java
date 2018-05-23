@@ -23,7 +23,7 @@ import javax.swing.*;
  */
 public class UserInterface {
 
-	public static Store store = new Store();
+	public static Store store = Store.getInstance();
 	
 	public UserInterface() {
 	}
@@ -58,7 +58,9 @@ public class UserInterface {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Load Item Properties
-				System.out.println("Item properties button clicked");				
+				System.out.println("Item properties button clicked");
+				
+				
 			}
 		});
         

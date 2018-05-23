@@ -20,6 +20,10 @@ public class Stock {
 		items.add(item);
 	}
 	
+	public ArrayList<Item> getItems() {
+		return items;
+	}
+	
 	public void remove(Item itemToRemove, int number) {
 		for(int i = 0; i < number; i++) {
 			for(Item item : items) {
