@@ -19,7 +19,7 @@ public class Store {
 	 * 
 	 */
 	private Store() {
-		
+		inventory = new Stock();
 	}
 	
 	public static Store getInstance() {
