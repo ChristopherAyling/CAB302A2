@@ -75,7 +75,7 @@ public class StockTests {
 		stock.add(testItem2);
 		stock.add(testItem3);
 		
-		for (Item item: stock) {
+		for (Item item: stock.getItems()) {
 			c++;
 		}
 		assertEquals(2, c);

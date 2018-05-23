@@ -24,7 +24,7 @@ public class RefrigeratedTruckTests {
 	public void testLoadCargo() {
 		// load that fits
 		
-		truck = new RefigeratedTruck();
+		truck = new RefrigeratedTruck();
 		
 		Stock cargo = new Stock();
 		

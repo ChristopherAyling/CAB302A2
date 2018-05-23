@@ -15,14 +15,13 @@ public class Store {
 	
 	private String name;
 	private double capital;
-	private Stock inventory;
-	private Stock itemProperties;
+	private Stock inventory= new Stock();
+	private Stock itemProperties = new Stock();
 	
 	/**
 	 * 
 	 */
 	private Store() {
-		inventory = new Stock();
 	}
 	
 	public static Store getInstance() {
