@@ -38,7 +38,7 @@ public class Stock {
 		}
 	}
 	
-	public int count(Item itemToCount) {
+	public Integer count(Item itemToCount) {
 		int itemCount = 0;
 		for(Item item : items) {
 			if(itemToCount.equals(item)) {

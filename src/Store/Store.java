@@ -3,6 +3,8 @@
  */
 package Store;
 
+import java.text.NumberFormat;
+
 import Stock.Stock;
 
 public class Store {
@@ -42,6 +44,10 @@ public class Store {
 	
 	public Double getCapital() {
 		return this.capital;
+	}
+	
+	public String displayCapital() {
+		return NumberFormat.getCurrencyInstance().format(capital);
 	}
 	
 	public Stock getInventory() {

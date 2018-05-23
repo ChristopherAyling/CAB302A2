@@ -57,7 +57,7 @@ public class StoreTests {
 		store.setCapital(100000);
 		assertEquals("$100,000.00", store.displayCapital());
 		// test negative
-		store.setCapital(-10.57)
+		store.setCapital(-10.57);
 		assertEquals("$-10.57", store.displayCapital());
 		// test 0
 		store.setCapital(0);

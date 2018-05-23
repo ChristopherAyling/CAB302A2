@@ -12,7 +12,7 @@ public class Item {
 	private int reorderPoint, reorderAmount;
 	
 	/**
-	 * Item with temperture
+	 * Item with temperature
 	 * @param name
 	 * @param manufacturingCost
 	 * @param sellPrice
@@ -30,7 +30,7 @@ public class Item {
 	}
 	
 	/**
-	 * Item without temperture
+	 * Item without temperature
 	 * @param name
 	 * @param manufacturingCost
 	 * @param sellPrice
@@ -50,23 +50,23 @@ public class Item {
 		return this.name;
 	}
 	
-	public double getManufacturingCost() {
+	public Double getManufacturingCost() {
 		return this.manufacuringCost;
 	}
 	
-	public double getSellPrice() {
+	public Double getSellPrice() {
 		return this.sellPrice;
 	}
 	
-	public int getReorderPoint() {
+	public Integer getReorderPoint() {
 		return this.reorderPoint;
 	}
 	
-	public int getReorderAmount() {
+	public Integer getReorderAmount() {
 		return this.reorderAmount;
 	}
 	
-	public double getTemperature() {
+	public Double getTemperature() {
 		return this.temperature;
 	}
 	
