@@ -11,7 +11,7 @@ import Stock.StockException;
 
 public class Store {
 
-	private static Store instance = new Store();
+	private static Store instance;
 	
 	private String name;
 	private double capital;
@@ -21,10 +21,13 @@ public class Store {
 	/**
 	 * 
 	 */
-	private Store() {
+	protected Store() {
 	}
 	
 	public static Store getInstance() {
+		if (instance == null) {
+			instance = new Store();
+		}
 		return instance;
 	}
 	

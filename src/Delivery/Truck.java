@@ -19,6 +19,15 @@ public abstract class Truck {
 	 */
 	public abstract void loadCargo(Stock stock);
 	
+	
+	
+	/**
+	 * 
+	 * 
+	 * @param item to load into truck
+	 */
+	public abstract void loadCargo(Item item);
+	
 	/**
 	 * Returns the cargo held in the Truck
 	 * 

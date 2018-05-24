@@ -12,8 +12,7 @@ import java.util.ArrayList;
 
 import GUI.CSVFormatException;
 import Stock.*;
-
-import Stock.Item;
+import Store.*;
 
 /**
  * @author Chris
@@ -21,6 +20,8 @@ import Stock.Item;
  */
 public class Manifest {
 
+	Store store = Store.getInstance();
+	
 	private ArrayList<Truck> trucks = new ArrayList<Truck>(); 
 	
 	/**
@@ -43,9 +44,10 @@ public class Manifest {
      * [item],[quantity]
 	 * 
 	 * @param path path to a file containing manifest data.
-	 * @deprecated
+	 * @throws StockException 
+	 *
 	 */
-	public Manifest(String path) throws IOException, CSVFormatException {
+	public Manifest(String path) throws IOException, CSVFormatException, StockException {
 		Truck truck;
 		Item item;
 		
@@ -66,9 +68,13 @@ public class Manifest {
 				String name = values[0];
 				// create Item instance
 //				Item item = new Item();
+				item = store.getItemProperties(name);
 				// get quantity
 				int quantity = Integer.parseInt(values[1]);					
 				// add to current truck's cargo
+				for (int i=0; i<quantity; i++) {
+					truck.loadCargo(item);
+				}
 				break;
 			}// end switch
 		}//end while

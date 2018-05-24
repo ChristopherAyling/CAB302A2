@@ -161,24 +161,21 @@ public class UserInterface {
 				fd.setVisible(true);
 				String path = fd.getFile();
 				
-				Manifest manifest = new Manifest();				
-				
 				try {
-					for (String row : Files.readAllLines(Paths.get(path))) {
-						System.out.println(row);
-					}
-					throw new CSVFormatException();
-				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(frame, "IOException");
-				} catch (CSVFormatException e2){
-					JOptionPane.showMessageDialog(frame, "CSV is in the wrong format");
+					Manifest manifest = new Manifest(path);
+					// update capital shown in GUI
+					store.addCapital(-manifest.getCost());
+					capitalLabel.setText("Capital: " + store.displayCapital());
+					// update item quantities in GUI
+					
+				} catch (IOException e3) {
+					e3.printStackTrace();
+				} catch (CSVFormatException e3) {
+					e3.printStackTrace();
+				} catch (StockException e3) {
+					e3.printStackTrace();
 				}
 				
-			
-				
-				// update capital shown in GUI
-				capitalLabel.setText("Capital: " + store.displayCapital());
-				// update item quantities in GUI
 				
 				frame.repaint();			
 			}//end action performed
