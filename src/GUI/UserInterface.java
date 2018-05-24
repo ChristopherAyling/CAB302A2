@@ -169,11 +169,11 @@ public class UserInterface {
 					// update item quantities in GUI
 					
 				} catch (IOException e3) {
-					e3.printStackTrace();
+					JOptionPane.showMessageDialog(frame, "Error reading file");
 				} catch (CSVFormatException e3) {
-					e3.printStackTrace();
+					JOptionPane.showMessageDialog(frame, "CSV in wrong format");
 				} catch (StockException e3) {
-					e3.printStackTrace();
+					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?");
 				}
 				
 				

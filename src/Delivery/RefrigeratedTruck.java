@@ -25,11 +25,34 @@ public class RefrigeratedTruck extends Truck {
 	}
 	
 	/**
-	 * Load cargo into the truck. Items which require refrigration are allowed too. 
+	 * Load cargo into the truck. Items which require refrigration are allowed. 
+	 * 
+	 * @param stock
 	 */
 	public void loadCargo(Stock stock) {
-		for (Item item : stock) {
-			cargo.add(item);
+		for (Item item : stock.getItems()) {
+			loadCargo(item);
+		}
+	}
+	
+	/**
+	 * Load an item into the truck's cargo.
+	 * 
+	 * @param item
+	 */
+	public void loadCargo(Item item) {
+		cargo.add(item);
+	}
+	
+	/**
+	 * Load multiple of the same item into the truck's cargo.
+	 * 
+	 * @param item
+	 * @param quantity
+	 */
+	public void loadCargo(Item item, int quantity) {
+		for (int i=0; i < quantity; i++) {
+			loadCargo(item);
 		}
 	}
 	
@@ -51,7 +74,7 @@ public class RefrigeratedTruck extends Truck {
 	 * @return temperature (c)
 	 */
 	public double getTemperature(){
-		return this.cargo.getColdestItemTemp();
+		return this.cargo.getColdestItemTemperature();
 	}
 	
 	public String getTypeToString() {

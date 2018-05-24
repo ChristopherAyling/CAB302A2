@@ -10,7 +10,7 @@ package Delivery;
 import Stock.*;
 
 public abstract class Truck {
-	private Stock cargo = new Stock();
+	protected Stock cargo = new Stock();
 	
 	/**
 	 * Load cargo into the Truck.

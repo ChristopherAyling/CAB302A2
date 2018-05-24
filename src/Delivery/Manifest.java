@@ -48,7 +48,7 @@ public class Manifest {
 	 *
 	 */
 	public Manifest(String path) throws IOException, CSVFormatException, StockException {
-		Truck truck;
+		Truck truck = null;
 		Item item;
 		
 		FileReader reader = new FileReader(path);
@@ -63,6 +63,7 @@ public class Manifest {
 				truck = new OrdinaryTruck();
 				break;
 			default: // add item to current truck
+				if (truck == null) throw new CSVFormatException();
 				String[] values = line.split(",");
 				// get item name
 				String name = values[0];
