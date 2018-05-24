@@ -22,19 +22,19 @@ public class StoreTests {
 	public void newStore() {
 		store = Store.getInstance();
 	}
-	
+
 	@Test
 	public void testEquality() {
 		store2 = Store.getInstance();
 		assertTrue(store == store2);
 	}
-	
+
 	@Test
 	public void NameTest() {
 		store.setName(name);
 		assertEquals(name, store.getName());
 	}
-	
+
 	@Test
 	public void CapitalTest() {
 		// test setter
@@ -53,14 +53,14 @@ public class StoreTests {
 		store.addCapital(-1.0);
 		assertEquals(capital-1.0, store.getCapital());
 	}
-	
+
 	@Test
 	public void displayCapitalTest() {
 		// test displaying starting capital
 		store.setCapital(100000);
 		assertEquals("$100,000.00", store.displayCapital());
 		// test negative
-		store.setCapital(-10.57)
+		store.setCapital(-10.57);
 		assertEquals("$-10.57", store.displayCapital());
 		// test 0
 		store.setCapital(0);
@@ -76,7 +76,7 @@ public class StoreTests {
 		store.setCapital(1000000000);
 		assertEquals("$1,000,000,000.00", store.displayCapital());
 	}
-	
+
 	@Test
 	public void InventoryTest() {
 		store.getInventory();

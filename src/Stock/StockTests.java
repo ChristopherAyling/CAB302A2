@@ -1,5 +1,7 @@
 package Stock;
 
+import 
+
 import static org.junit.Assert.*;
 
 import java.io.Console;
@@ -71,9 +73,9 @@ public class StockTests {
 	@Test
 	public void iterTest() {
 		int c = 0;
-		stock.add(testItem1);
-		stock.add(testItem2);
-		stock.add(testItem3);
+		stock.add(tempItem1);
+		stock.add(tempItem2);
+		stock.add(tempItem3);
 		
 		for (Item item: stock) {
 			c++;
@@ -83,8 +85,8 @@ public class StockTests {
 	
 	@Test
 	public void removeTest() {
-		stock.add(testItem1);
-		stock.remove(testItem1.getName());
+		stock.add(tempItem1);
+		stock.remove(tempItem1.getName());
 	}
 	
 	@Test
