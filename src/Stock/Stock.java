@@ -48,13 +48,14 @@ public class Stock {
 		return itemCount;
 	}
 	
-	public void getColdestItemTemperature() {
+	public double getColdestItemTemperature() {
 		double coldestTemperature = Double.MAX_VALUE;
 		for(Item item : items) {
 			if(item.getTemperature() < coldestTemperature) {
 				coldestTemperature = item.getTemperature();
 			}
 		}
+		return coldestTemperature;
 	}
 
 }

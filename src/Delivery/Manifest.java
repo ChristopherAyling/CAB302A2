@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import GUI.CSVFormatException;
 import Stock.*;
 
 import Stock.Item;
@@ -42,8 +43,9 @@ public class Manifest {
      * [item],[quantity]
 	 * 
 	 * @param path path to a file containing manifest data.
+	 * @deprecated
 	 */
-	public Manifest(String path) throws IOException{
+	public Manifest(String path) throws IOException, CSVFormatException {
 		Truck truck;
 		Item item;
 		
@@ -63,16 +65,16 @@ public class Manifest {
 				// get item name
 				String name = values[0];
 				// create Item instance
-				Item item = new Item()
+//				Item item = new Item();
 				// get quantity
 				int quantity = Integer.parseInt(values[1]);					
 				// add to current truck's cargo
-				truck.loadCargo(name, quantity);
 				break;
 			}// end switch
 		}//end while
 		bufferedReader.close();
 	}
+	
 
 	/**
 	 * Construct a manifest that minimizes the cost of reordering

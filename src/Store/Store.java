@@ -40,7 +40,7 @@ public class Store {
 		this.capital += capital;
 	}
 	
-	public Double getCapital() {
+	public double getCapital() {
 		return this.capital;
 	}
 	
@@ -48,4 +48,7 @@ public class Store {
 		return this.inventory;
 	}
 
+	public String displayCapital() {
+		return "Not Implemented";
+	}
 }
