@@ -168,16 +168,16 @@ public class UserInterface {
 					capitalLabel.setText("Capital: " + store.displayCapital());
 					// update item quantities in GUI
 					
+					frame.repaint();					
 				} catch (IOException e3) {
 					JOptionPane.showMessageDialog(frame, "Error reading file");
 				} catch (CSVFormatException e3) {
 					JOptionPane.showMessageDialog(frame, "CSV in wrong format");
 				} catch (StockException e3) {
 					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?");
+					System.out.println(e3.getMessage());
 				}
-				
-				
-				frame.repaint();			
+				System.out.println("manifest should've been loaded!");
 			}//end action performed
 		});
         

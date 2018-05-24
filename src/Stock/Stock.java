@@ -61,5 +61,9 @@ public class Stock {
 		}
 		return coldestTemperature;
 	}
+	
+	public int size() {
+		return items.size();
+	}
 
 }

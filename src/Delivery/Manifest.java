@@ -51,47 +51,38 @@ public class Manifest {
 		Truck truck = null;
 		Item item;
 		
+		System.out.println("creating file reader");
 		FileReader reader = new FileReader(path);
 		BufferedReader bufferedReader = new BufferedReader(reader);
-		String line = bufferedReader.readLine();
-		while (line != null) {
-			switch (line) {
-			case ">Ordinary": // make a new truck
+		String line;
+		
+		System.out.println("Reading lines");
+		while ((line = bufferedReader.readLine()) != null) {
+			System.out.println(line);
+			switch (line) { // make a truck
+			case ">Ordinary":
 				truck = new RefrigeratedTruck();
 				break;
-			case ">Refrigerated": // make a new truck
+			case ">Refrigerated":
 				truck = new OrdinaryTruck();
 				break;
-			default: // add item to current truck
-				if (truck == null) throw new CSVFormatException();
+			default: // else add an item to a truck
+				if (truck == null) throw new CSVFormatException(); // why is there not a truck specified??
+				
+				// parse the String
 				String[] values = line.split(",");
-				// get item name
+				int quantity = Integer.parseInt(values[1]);
 				String name = values[0];
-				// create Item instance
-//				Item item = new Item();
 				item = store.getItemProperties(name);
-				// get quantity
-				int quantity = Integer.parseInt(values[1]);					
+				
 				// add to current truck's cargo
-				for (int i=0; i<quantity; i++) {
+				for (int i=0; i!=quantity; i++) {
 					truck.loadCargo(item);
 				}
 				break;
 			}// end switch
 		}//end while
 		bufferedReader.close();
-	}
-	
-
-	/**
-	 * Construct a manifest that minimizes the cost of reordering
-	 * the missing items.
-	 * 
-	 * @param stock which needs restocking
-	 */
-	public Manifest(Stock toRestock) {
-		// create an optimal manifest
-		
 	}
 		
 	/**
@@ -106,11 +97,13 @@ public class Manifest {
 	/**
 	 * @return a collection of strings containing the names of the items
 	 * in the trucks in the manifest.
+	 * 
+	 * @deprecated
 	 */
 	public ArrayList<String> getItems(){
 		ArrayList<String> itemNames =  new ArrayList<String>();
 		for (Truck truck : trucks) {
-			for (Item item : truck.getCargo()) {
+			for (Item item : truck.getCargo().getItems()) {
 				itemNames.add(item.getName());
 			}
 		}
@@ -142,17 +135,19 @@ public class Manifest {
 	public String toString() {
 		String nl = System.getProperty("line.seperator");
 		StringBuilder manifestSB = new StringBuilder();
+		
 		for (Truck truck : trucks) {
 			manifestSB.append(">"+truck.getTypeToString()+nl);
-			for (Item item : truck.getCargo()) {
+			for (Item item : truck.getCargo().getItems()) {
 				String itemName = item.getName();
-				int quantity = truck.getCargo().getQuantity(itemName);
+				int quantity = truck.getCargo().count(item);
 				manifestSB.append(itemName + "," + quantity + nl);
 			}//end for
 		}//end for
 		
 		return manifestSB.toString();
 	}
+	
 
 	/**
 	 * Write the manifest to a CSV file using the following format:

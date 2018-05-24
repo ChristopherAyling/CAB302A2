@@ -77,6 +77,7 @@ public class StockTests {
 		stock.add(tempItem3);
 		
 		for (Item item: stock.getItems()) {
+			assertNotNull(item);
 			c++;
 		}
 		assertEquals(2, c);
@@ -85,7 +86,7 @@ public class StockTests {
 	@Test
 	public void removeTest() {
 		stock.add(tempItem1);
-		stock.remove(tempItem1.getName());
+		stock.remove(tempItem1);
 	}
 	
 	@Test

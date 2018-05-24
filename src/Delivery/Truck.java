@@ -13,7 +13,7 @@ public abstract class Truck {
 	protected Stock cargo = new Stock();
 	
 	/**
-	 * Load cargo into the Truck.
+	 * Load stock into the Truck.
 	 *
 	 * @param stock
 	 */
@@ -22,11 +22,12 @@ public abstract class Truck {
 	
 	
 	/**
-	 * 
+	 * Load an item into the Truck.
 	 * 
 	 * @param item to load into truck
 	 */
 	public abstract void loadCargo(Item item);
+	
 	
 	/**
 	 * Returns the cargo held in the Truck
@@ -37,12 +38,13 @@ public abstract class Truck {
 		return cargo;
 	}
 	
+	
 	/**
 	 * 
 	 * @return Amount of items in the truck
 	 */
 	public int getCargoCurrentCapacity() { 
-		return cargo.count();
+		return cargo.size();
 	}
 	
 	/**

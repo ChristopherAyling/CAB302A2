@@ -41,6 +41,12 @@ public class OrdinaryTruck extends Truck {
 	}
 	
 	
+	/**
+	 * Load multiple of the same item into the truck.
+	 * 
+	 * @param item
+	 * @param quantity
+	 */
 	public void loadCargo(Item item, int quantity) {
 		for (int i=0; i < quantity; i++) {
 			loadCargo(item);

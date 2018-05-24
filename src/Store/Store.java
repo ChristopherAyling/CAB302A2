@@ -71,10 +71,7 @@ public class Store {
 		for(Item item : itemProperties.getItems()) {
 			if(item.getName().equals(itemName)) return copyItem(item);
 		}
-		throw new StockException();
+		throw new StockException("Item with name: " + itemName + " does not have properties loaded");
 	}
 
-	public String displayCapital() {
-		return "Not Implemented";
-	}
 }
