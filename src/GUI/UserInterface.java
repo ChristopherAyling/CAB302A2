@@ -23,6 +23,8 @@ import Stock.*;
 import Delivery.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  * 
@@ -204,8 +206,9 @@ public class UserInterface {
         
         // create and add table to centre
         String[] columnNames = {"Name", "Quantity", "Manufactuing Cost", "Sell Price", "Reorder Point", "Reorder Amount", "Temperature"};
-        JTable table = new JTable(3, 8); //TODO initialize table with columns and empty rows
-        mainPanel.add(table, BorderLayout.CENTER);// TODO put it in a scroll pane
+        JTable table = new JTable(new DefaultTableModel(columnNames, 3)); // initialize table with columns and empty rows
+        JScrollPane pane = new JScrollPane(table);
+        mainPanel.add(pane, BorderLayout.CENTER);
         
         //add panel to gui
         frame.getContentPane().add(mainPanel);
