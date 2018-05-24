@@ -65,6 +65,12 @@ public class UserInterface {
 
         //add buttons
         JButton loadItemPropertiesButton = new JButton("Load Item Properties");
+        JButton exportManifestButton = new JButton("Export Manifest");
+        JButton loadManifestButton = new JButton("Load Manifest");
+        JButton loadSalesLogButton = new JButton("Load Sales Log");
+
+        // add ActionListeners
+        
         loadItemPropertiesButton.addActionListener(new ActionListener() {
         	
         	/**
@@ -99,6 +105,10 @@ public class UserInterface {
 						}
 					}
 					bufferedReader.close();
+					exportManifestButton.setEnabled(true);
+			        loadManifestButton.setEnabled(true);
+			        loadSalesLogButton.setEnabled(true);
+			        loadItemPropertiesButton.setEnabled(false);
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -110,7 +120,6 @@ public class UserInterface {
 			}
 		});
         
-        JButton exportManifestButton = new JButton("Export Manifest");
         exportManifestButton.addActionListener(new ActionListener() {
         	
         	/**
@@ -125,11 +134,9 @@ public class UserInterface {
 				// TODO Create an optimised manifest object from current inventory.
 					// TODO get
 				
-				// TODO User selects location to save manifest to.
 				FileDialog fd = new FileDialog(frame, "Export Manifest", FileDialog.SAVE);
 				fd.setVisible(true);
 				String path = fd.getFile();
-				// TODO Write manifest to CSV and save to location.
 				Manifest manifest = new Manifest();
 				try {
 					manifest.writeToCSV(path);
@@ -141,7 +148,6 @@ public class UserInterface {
 			}
 		});
         
-        JButton loadManifestButton = new JButton("Load Manifest");
         loadManifestButton.addActionListener(new ActionListener() {
 			
         	/**
@@ -151,100 +157,24 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Load manifest button clicked");
 				// present user with file selection dialog
-				FileDialog fd = new FileDialog(frame, "Load Manifest", FileDialog.SAVE);
+				FileDialog fd = new FileDialog(frame, "Load Manifest", FileDialog.LOAD);
 				fd.setVisible(true);
 				String path = fd.getFile();
 				
-				Truck truck;
-				Item item;
-				Stock stock;
-				
-				FileReader reader = new FileReader(path);
-				BufferedReader bufferedReader = new BufferedReader(reader);
-				String line;
-				
-				Manifest manifest = new Manifest();
-				
-				java.util.List<String> rows;
-				try {
-					rows = Files.readAllLines(Paths.get(path));
-					for (int i=0; i<rows.size(); i++) {
-						switch (rows.get(i)) {
-						case ">Ordinary":
-							truck = new OrdinaryTruck();
-							for (; i<rows.size(); i++) {
-								
-							}
-							break;
-						case ">Refrigerated":
-							truck = new RefrigeratedTruck();
-							break;
-						default:
-							break;
-						}
-					}
-				} catch (IOException e3) {
-					e3.printStackTrace();
-				}
-				
-				
+				Manifest manifest = new Manifest();				
 				
 				try {
-					
 					for (String row : Files.readAllLines(Paths.get(path))) {
-						stock = new Stock();
-						// create a new truck
-						switch (row) {
-						case ">Ordinary":
-							truck = new OrdinaryTruck();
-							break;
-						case ">Refrigerated":
-							truck = new RefrigeratedTruck();
-							break;
-						default:
-							break;
-						}
-						// get the items
-						String[] itemData = row.split(",");
-						item = new Item("test", 10, 1, 10, 10);
-						store.getInventory().add(item);
-						stock.add(item);
-					}// end for
-					
+						System.out.println(row);
+					}
+					throw new CSVFormatException();
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(frame, "IOException");
 				} catch (CSVFormatException e2){
 					JOptionPane.showMessageDialog(frame, "CSV is in the wrong format");
 				}
 				
-				double cost = 0;
-				while ((line = bufferedReader.readLine()) != null) {
-					stock = new Stock();
-					switch (line) { // create a truck
-					case ">Ordinary":
-						truck = new OrdinaryTruck();
-						break;
-					case ">Refrigerated":
-						truck = new RefrigeratedTruck();
-						break;
-					default:
-						JOptionPane.showMessageDialog(frame, "Your CSV is in the wrong format!");
-						break;					
-					}//end switch
-					
-					while ((line = bufferedReader.readLine()) != null) {// fill the truck
-						String[] itemData = line.split(","); // itemData[0] is name and itemData[1] is quantity
-//						item = store.getItem(itemData[0]);
-						item = new Item("test", 10.0, 0.1, 10, 20);
-						store.getInventory().add(item);
-						stock.add(item);
-					}//end while
-					truck.loadCargo(stock);
-					cost += truck.getCost();
-					store.addCapital(-cost);
-					capitalLabel.setText("Capital: " + store.displayCapital());
-				}//end while
-				bufferedReader.close();
+			
 				
 				// update capital shown in GUI
 				capitalLabel.setText("Capital: " + store.displayCapital());
@@ -254,7 +184,6 @@ public class UserInterface {
 			}//end action performed
 		});
         
-        JButton loadSalesLogButton = new JButton("Load Sales Log");
         loadSalesLogButton.addActionListener(new ActionListener() {
         	
         	/**
@@ -264,10 +193,6 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Load Sales
 				System.out.println("Load Sales Log button clicked");
-				
-				store.addCapital(100);
-				capitalLabel.setText("10000000000");
-				frame.repaint();
 			}
 		});
         
@@ -277,7 +202,7 @@ public class UserInterface {
         topPanel.add(loadSalesLogButton);
         exportManifestButton.setEnabled(false);
         loadManifestButton.setEnabled(false);
-//        loadSalesLogButton.setEnabled(false);
+        loadSalesLogButton.setEnabled(false);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         
         // create and add table to centre
