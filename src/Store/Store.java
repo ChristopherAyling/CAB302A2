@@ -3,7 +3,11 @@
  */
 package Store;
 
+import java.text.NumberFormat;
+
+import Stock.Item;
 import Stock.Stock;
+import Stock.StockException;
 
 public class Store {
 
@@ -11,13 +15,13 @@ public class Store {
 	
 	private String name;
 	private double capital;
-	private Stock inventory;
+	private Stock inventory= new Stock();
+	private Stock itemProperties = new Stock();
 	
 	/**
 	 * 
 	 */
 	private Store() {
-		
 	}
 	
 	public static Store getInstance() {
@@ -44,8 +48,27 @@ public class Store {
 		return this.capital;
 	}
 	
+	public String displayCapital() {
+		return NumberFormat.getCurrencyInstance().format(capital);
+	}
+	
 	public Stock getInventory() {
 		return this.inventory;
+	}
+	
+	public void setItemProperties(Item item) {
+		this.itemProperties.add(item);
+	}
+	
+	private Item copyItem(Item item) {
+		return new Item(item.getName(), item.getManufacturingCost(), item.getSellPrice(), item.getReorderPoint(), item.getReorderAmount(), item.getTemperature());
+	}
+	
+	public Item getItemProperties(String itemName) throws StockException {
+		for(Item item : itemProperties.getItems()) {
+			if(item.getName().equals(itemName)) return copyItem(item);
+		}
+		throw new StockException();
 	}
 
 	public String displayCapital() {

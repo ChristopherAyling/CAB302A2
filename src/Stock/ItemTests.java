@@ -56,7 +56,7 @@ public class ItemTests {
 	@Test
 	public void getTempTest() {
 		Item item = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
-		assertEquals(temp, item.getTemp());
+		assertTrue(temp == item.getTemperature());
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public class ItemTests {
 	}
 	
 	@Test 
-	private void equalsTest() {
+	public void equalsTest() {
 		Item item1 = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
 		Item item2 = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
 		// https://www.sitepoint.com/implement-javas-equals-method-correctly/

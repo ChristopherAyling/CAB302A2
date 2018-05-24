@@ -20,6 +20,10 @@ public class Stock {
 		items.add(item);
 	}
 	
+	public ArrayList<Item> getItems() {
+		return items;
+	}
+	
 	public void remove(Item itemToRemove, int number) {
 		for(int i = 0; i < number; i++) {
 			for(Item item : items) {
@@ -38,7 +42,7 @@ public class Stock {
 		}
 	}
 	
-	public int count(Item itemToCount) {
+	public Integer count(Item itemToCount) {
 		int itemCount = 0;
 		for(Item item : items) {
 			if(itemToCount.equals(item)) {

@@ -6,11 +6,15 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileNotFoundException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.util.Arrays;
 import java.util.EventListener;
 
@@ -72,7 +76,37 @@ public class UserInterface {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Load Item Properties
-				System.out.println("Item properties button clicked");				
+				System.out.println("Item properties button clicked");
+				FileDialog fd = new FileDialog(frame, "Load item properties", FileDialog.LOAD);
+				fd.setVisible(true);
+				
+				try {
+					FileReader reader = new FileReader(fd.getFile());
+					BufferedReader bufferedReader = new BufferedReader(reader);
+					String line;
+					String[] propertiesList;
+					while((line = bufferedReader.readLine()) != null) {
+						propertiesList = line.split(",");
+						switch (propertiesList.length) {
+						case 5: // item without temperature
+							store.setItemProperties(new Item(propertiesList[0], Double.parseDouble(propertiesList[1]), Double.parseDouble(propertiesList[2]), Integer.parseInt(propertiesList[3]), Integer.parseInt(propertiesList[4])));
+							break;
+						case 6: // item with temperature
+							store.setItemProperties(new Item(propertiesList[0], Double.parseDouble(propertiesList[1]), Double.parseDouble(propertiesList[2]), Integer.parseInt(propertiesList[3]), Integer.parseInt(propertiesList[4]), Double.parseDouble(propertiesList[5])));
+							break;
+						default:
+							break;
+						}
+					}
+					bufferedReader.close();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
         
