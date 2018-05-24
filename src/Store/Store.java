@@ -40,7 +40,7 @@ public class Store {
 		this.capital += capital;
 	}
 	
-	public double getCapital() {
+	public Double getCapital() {
 		return this.capital;
 	}
 	
