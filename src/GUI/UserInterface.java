@@ -168,7 +168,7 @@ public class UserInterface {
 					capitalLabel.setText("Capital: " + store.displayCapital());
 					// update item quantities in GUI
 					
-					frame.repaint();					
+					frame.repaint();				
 				} catch (IOException e3) {
 					JOptionPane.showMessageDialog(frame, "Error reading file");
 				} catch (CSVFormatException e3) {
