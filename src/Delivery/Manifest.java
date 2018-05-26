@@ -119,22 +119,6 @@ public class Manifest {
 		trucks.add(truck);
 	}
 	
-
-	/**
-	 * @return a collection of strings containing the names of the items
-	 * in the trucks in the manifest.
-	 * 
-	 * @deprecated
-	 */
-	public ArrayList<String> getItems(){
-		ArrayList<String> itemNames =  new ArrayList<String>();
-		for (Truck truck : trucks) {
-			for (Item item : truck.getCargo().getItems()) {
-				itemNames.add(item.getName());
-			}
-		}
-		return itemNames;
-	}
 	
 	/**
 	 * Sums the cost of all trucks in the manifest.
