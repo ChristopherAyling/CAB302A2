@@ -85,9 +85,11 @@ public class Manifest {
 		while ((line = bufferedReader.readLine()) != null) {
 			switch (line) { // make a truck
 			case ">Ordinary":
+				if (truck != null) trucks.add(truck);
 				truck = new RefrigeratedTruck();
 				break;
 			case ">Refrigerated":
+				if (truck != null) trucks.add(truck);
 				truck = new OrdinaryTruck();
 				break;
 			default: // else add an item to a truck
@@ -105,7 +107,6 @@ public class Manifest {
 				}
 				break;
 			}// end switch
-			trucks.add(truck);
 		}//end while
 		bufferedReader.close();
 	}

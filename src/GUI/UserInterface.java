@@ -175,7 +175,7 @@ public class UserInterface {
 					// update item quantities in GUI
 					
 					frame.repaint();
-					JOptionPane.showMessageDialog(frame, "Manifest Successfully Loaded.\nTotal Price: " + manifest.getCost());
+					JOptionPane.showMessageDialog(frame, "Manifest Successfully Loaded.\nTotal Price: $" + manifest.getCost());
 				} catch (IOException e3) {
 					JOptionPane.showMessageDialog(frame, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (CSVFormatException e3) {
