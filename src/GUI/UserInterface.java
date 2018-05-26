@@ -23,6 +23,8 @@ import Stock.*;
 import Delivery.*;
 
 import javax.swing.*;
+import javax.swing.plaf.metal.DefaultMetalTheme;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -49,10 +51,11 @@ public class UserInterface {
 	 * Create the show the graphical user interface.
 	 */
 	private static void createAndShowGUI() {
+		store.setName("SuperMart");
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		
 		//Create and set up the window. 
-        JFrame frame = new JFrame("HelloWorldSwing");
+        JFrame frame = new JFrame(store.getName() + " Inventory Management System");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         
         // create top level panel
@@ -122,8 +125,8 @@ public class UserInterface {
 			}
 		});
         
+        
         exportManifestButton.addActionListener(new ActionListener() {
-        	
         	/**
         	 * Export a manifest based on current inventory.
         	 */
@@ -143,17 +146,15 @@ public class UserInterface {
 					Manifest manifest = new Manifest(store);
 					manifest.writeToCSV(path);
 				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(frame, "Error writing manifest to CSV");
+					JOptionPane.showMessageDialog(frame, "Error writing manifest to CSV", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (StockException e2) {
-					JOptionPane.showMessageDialog(frame, "Error exporting manifest. Are item properties properly loaded?");
+					JOptionPane.showMessageDialog(frame, "Error exporting manifest. Are item properties properly loaded?", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				
-				System.out.println("Export manifest button clicked");
 			}
 		});
         
+        
         loadManifestButton.addActionListener(new ActionListener() {
-			
         	/**
         	 * Load in a manifest; decreases capital and increases inventory.
         	 */
@@ -168,25 +169,26 @@ public class UserInterface {
 				try {
 					Manifest manifest = new Manifest(path);
 					// update capital shown in GUI
+					System.out.println(manifest.getCost());
 					store.addCapital(-manifest.getCost());
 					capitalLabel.setText("Capital: " + store.displayCapital());
 					// update item quantities in GUI
 					
-					frame.repaint();				
+					frame.repaint();
+					JOptionPane.showMessageDialog(frame, "Manifest Successfully Loaded.\nTotal Price: " + manifest.getCost());
 				} catch (IOException e3) {
-					JOptionPane.showMessageDialog(frame, "Error reading file");
+					JOptionPane.showMessageDialog(frame, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (CSVFormatException e3) {
-					JOptionPane.showMessageDialog(frame, "CSV in wrong format");
+					JOptionPane.showMessageDialog(frame, "CSV in wrong format", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (StockException e3) {
-					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?");
-					System.out.println(e3.getMessage());
+					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				System.out.println("manifest should've been loaded!");
 			}//end action performed
 		});
         
+        
         loadSalesLogButton.addActionListener(new ActionListener() {
-        	
         	/**
         	 * Load in a sales log; increases capital and  inventory.
         	 */
@@ -196,6 +198,7 @@ public class UserInterface {
 				System.out.println("Load Sales Log button clicked");
 			}
 		});
+        
         
         topPanel.add(loadItemPropertiesButton);
         topPanel.add(exportManifestButton);

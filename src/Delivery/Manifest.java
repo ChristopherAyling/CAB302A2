@@ -105,6 +105,7 @@ public class Manifest {
 				}
 				break;
 			}// end switch
+			trucks.add(truck);
 		}//end while
 		bufferedReader.close();
 	}
