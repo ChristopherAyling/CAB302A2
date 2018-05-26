@@ -24,6 +24,24 @@ public class RefrigeratedTruckTests {
 	}
 	
 	@Test
+	public void testLoadCargoSingleItemNoTemp() throws DeliveryException {
+		truck = new RefrigeratedTruck();
+		
+		Item item = new Item("beans", 1, 1, 1, 1);
+		
+		truck.loadCargo(item);
+	}
+	
+	@Test
+	public void testLoadCargoSingleItemTemp() throws DeliveryException {
+		truck = new RefrigeratedTruck();
+		
+		Item item = new Item("beans", 1, 1, 1, 1, 0);
+		
+		truck.loadCargo(item);
+	}
+	
+	@Test
 	public void testLoadCargo() throws DeliveryException {
 		// load that fits
 		
@@ -72,23 +90,21 @@ public class RefrigeratedTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		assertEquals(truck.getCargo(), cargo);
+		assertEquals(truck.getCargo().toString(), cargo.toString());
 	}
+	
 	
 	@Test
 	public void testTemperature() throws DeliveryException {
 		truck = new RefrigeratedTruck();
 		
-		assertEquals(truck.getTemperature().doubleValue(), 10);  // base/high temperature
+		assertEquals(10.0, truck.getTemperature().doubleValue(), 0.001);  // base/high temperature
 		
-		Stock cargo = new Stock();
+		truck.loadCargo(new Item("name", 1, 2, 1, 1, -20));
 		
-		cargo.add(new Item("name", 1, 2, 1, 1, -20));
-		
-		truck.loadCargo(cargo);
-		
-		assertEquals(truck.getTemperature().doubleValue(), -20);  // low temperature
+		assertEquals(-20, truck.getTemperature().doubleValue(), 0.001);  // low temperature
 	}
+	
 	
 	@Test
 	public void testCargoCurrentCapacity() throws DeliveryException {	
@@ -111,7 +127,7 @@ public class RefrigeratedTruckTests {
 	public void testCost() throws DeliveryException {
 		truck = new RefrigeratedTruck();
 		
-		assertEquals(truck.getCost(), 900);  // when empty
+		assertEquals(900 + 200 * java.lang.Math.pow(0.7, truck.getTemperature() / 5), truck.getCost(), 0.001);  // when empty
 		
 		Stock cargo = new Stock();
 		
@@ -121,7 +137,7 @@ public class RefrigeratedTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		assertEquals(truck.getCost(), 900 + 200 * java.lang.Math.pow(0.7, truck.getTemperature() / 5));  // when containing
+		assertEquals(900 + 200 * java.lang.Math.pow(0.7, truck.getTemperature() / 5), truck.getCost(), 0.001);  // when containing
 	}
 
 }

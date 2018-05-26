@@ -22,9 +22,10 @@ public class OrdinaryTruck extends Truck {
 		
 	/**
 	 * Load an item into the truck. If the item requires refrigeration, raise
-	 * an exception as refigerated items may not be held by and OrdinaryTruck.
+	 * an exception as refrigerated items may not be held by and OrdinaryTruck.
 	 * @throws StockException 
 	 */
+	@Override
 	public void loadCargo(Item item) throws DeliveryException {
 		if (item.getTemperature() != null) {
 			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
@@ -72,7 +73,7 @@ public class OrdinaryTruck extends Truck {
 	 */
 	@Override
 	public double getCost() {
-		return 750.0 + (0.25*this.getCargoCurrentCapacity());
+		return 750.0 + (0.25*this.countItemsInCargo());
 	}
 	
 	@Override

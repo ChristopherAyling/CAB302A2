@@ -36,7 +36,7 @@ public abstract class Truck {
 	 * @throws DeliveryException if truck will exceed capacity.
 	 */
 	public void loadCargo(Item item, int quantity) throws DeliveryException {
-		if (quantity + getCargoCurrentCapacity() >= cargoMaxCapacity) {
+		if (quantity + countItemsInCargo() > cargoMaxCapacity) {
 			throw new DeliveryException("Truck will exceed max capacity");
 		}
 		for (int i=0; i < quantity; i++) {
@@ -52,7 +52,7 @@ public abstract class Truck {
 	 * @throws DeliveryException if truck will exceed capacity.
 	 */
 	public void loadCargo(Stock stock) throws DeliveryException {
-		if (stock.size() + getCargoCurrentCapacity() > cargoMaxCapacity) {
+		if (stock.size() + countItemsInCargo() > cargoMaxCapacity) {
 			throw new DeliveryException("Truck will exceeded max capacity");
 		} else {
 			for (Item item : stock.getItems()) {
@@ -79,6 +79,10 @@ public abstract class Truck {
 	 */
 	public int getCargoCurrentCapacity() { 
 		return cargoMaxCapacity - cargo.size();
+	}
+	
+	public int countItemsInCargo() {
+		return cargo.size();
 	}
 	
 	public Double getTemperature() {
@@ -115,4 +119,5 @@ public abstract class Truck {
 		sb.append(cargo.toString());
 		return sb.toString();
 	}
+	
 }

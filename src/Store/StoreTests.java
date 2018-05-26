@@ -1,14 +1,11 @@
 package Store;
 
-import Stock.*;
-import Delivery.*;
-
 import org.junit.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Stock.Stock;
+
 
 public class StoreTests {
 

@@ -61,20 +61,46 @@ public class OrdinaryTruckTests {
 	}
 	
 	@Test
+	public void testCapacityValues() {
+		Truck truck = new OrdinaryTruck();
+		
+		assertEquals(1000, truck.getCargoCurrentCapacity());
+		assertEquals(1000, truck.cargoMaxCapacity);
+	}
+	
+	@Test
+	public void testLoadCargoSingleItem() throws DeliveryException {
+		truck = new OrdinaryTruck();
+		
+		Item item = new Item("name", 1, 2, 1, 1);
+		
+		truck.loadCargo(item);
+	}
+	
+	@Test
+	public void testLoadCargoSingleStock() throws DeliveryException {
+		truck = new OrdinaryTruck();
+		
+		Stock stock = new Stock();
+		
+		truck.loadCargo(stock);
+	}
+	
+	@Test
 	public void testCargo() throws DeliveryException {
 		truck = new OrdinaryTruck();
 		
 		Stock cargo = new Stock();
 		
-		for(int i = 1; i < truck.cargoMaxCapacity; i++) {
+		for(int i = 50; i < truck.cargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
-		
 		truck.loadCargo(cargo);
 		
-		assertEquals(truck.getCargo(), cargo);
-		
+//		assertEquals(truck.getCargo(), cargo);
+		assertEquals(truck.getCargo().toString(), cargo.toString());
 	}
+	
 	
 	@Test
 	public void testCargoCurrentCapacity() throws DeliveryException {	
@@ -93,12 +119,12 @@ public class OrdinaryTruckTests {
 		assertEquals(truck.getCargoCurrentCapacity(), 1000 - 500);  // when containing
 	}
 	
-	@SuppressWarnings("deprecation")
+	
 	@Test
 	public void testCost() throws DeliveryException {
 		truck = new OrdinaryTruck();
 		
-		assertEquals(truck.getCost(), 750.0);  // when empty
+		assertEquals(750.0, truck.getCost(), 0.001);  // when empty
 		
 		Stock cargo = new Stock();
 		
@@ -108,7 +134,7 @@ public class OrdinaryTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		assertEquals(truck.getCost(), 750 + (0.25 * 500));  // when containing
+		assertEquals(truck.getCost(), 750 + (0.25 * 500), 0.001);  // when containing
 	}
 
 }

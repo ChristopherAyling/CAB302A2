@@ -157,8 +157,6 @@ public class Manifest {
 	 *
 	 */
 	public String toString() {
-//		String nl = System.getProperty("line.seperator");
-		String nl = "\n";
 		StringBuilder manifestSB = new StringBuilder();
 		Map<String, Integer> itemCounts = new HashMap<String, Integer>();
 		itemCounts.put("name", 7);

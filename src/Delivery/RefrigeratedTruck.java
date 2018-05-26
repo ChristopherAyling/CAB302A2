@@ -18,6 +18,8 @@ import Stock.*;
  *
  */
 public class RefrigeratedTruck extends Truck {
+	public final double maxTemp = 10;
+	public final double minTemp = -20;
 
 	public RefrigeratedTruck() {
 		cargoMaxCapacity = 800;
@@ -27,11 +29,14 @@ public class RefrigeratedTruck extends Truck {
 	 * 
 	 * @throws DeliveryException 
 	 */
+	@Override
 	public void loadCargo(Item item) throws DeliveryException {
-		if (item.getTemperature() > 10 | item.getTemperature() < -20) {
-			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
+
+		if ((item.getTemperature() == null) || (item.getTemperature() <= maxTemp) && (item.getTemperature() >= minTemp)) {
+			super.loadCargo(item);
+		} else {
+			throw new DeliveryException("Item's temperature <" + item.getTemperature() + "> is outside RefrigeratedTruck's safe range: <" + minTemp + "> to <" + maxTemp + ">");			
 		}
-		super.loadCargo(item);
 	}
 	
 	
@@ -41,10 +46,11 @@ public class RefrigeratedTruck extends Truck {
 	 */
 	@Override
 	public void loadCargo(Stock stock) throws DeliveryException {
-		if (stock.getColdestItemTemperature() > 10 | stock.getColdestItemTemperature() < -20) {
-			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
+		if ((stock.getColdestItemTemperature() == null) || (stock.getColdestItemTemperature() <= maxTemp) && (stock.getColdestItemTemperature() >= minTemp)) {
+			super.loadCargo(stock);
+		} else {
+			throw new DeliveryException("Item's temperature <" + stock.getColdestItemTemperature() + "> is outside RefrigeratedTruck's safe range: <" + minTemp + "> to <" + maxTemp + ">");
 		}
-		super.loadCargo(stock);
 	}
 	
 	
@@ -54,11 +60,13 @@ public class RefrigeratedTruck extends Truck {
 	 */
 	@Override
 	public void loadCargo(Item item, int quantity) throws DeliveryException {
-		if (item.getTemperature() > 10 | item.getTemperature() < -20) {
-			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
+		if ((item.getTemperature() == null) || (item.getTemperature() <= maxTemp) && (item.getTemperature() >= minTemp)) {
+			super.loadCargo(item, quantity);
+		} else {
+			throw new DeliveryException("Item's temperature <" + item.getTemperature() + "> is outside RefrigeratedTruck's safe range: <" + minTemp + "> to <" + maxTemp + ">");
 		}
-		super.loadCargo(item, quantity);
 	}
+
 	
 	/**
 	 * Calculate the cost of the truck using the following formula:
@@ -73,15 +81,20 @@ public class RefrigeratedTruck extends Truck {
 	}
 	
 	
+	
 	/**
 	 * Returns the temperature in degrees celcius of the coldest item in the Truck. The
-	 * temperature returned is in the R(-20.0, 10);
+	 * temperature returned is in the set R(-20.0, 10);
 	 * 
 	 * @return temperature (c)
 	 */
 	@Override
 	public Double getTemperature(){
-		return this.cargo.getColdestItemTemperature();
+		if (cargo.getColdestItemTemperature() == null) {
+			return maxTemp;
+		} else {
+			return cargo.getColdestItemTemperature();
+		}
 	}
 	
 	@Override
