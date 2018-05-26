@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import GUI.CSVFormatException;
 import Stock.*;
@@ -32,6 +34,31 @@ public class Manifest {
 
 	}
 	
+	public Manifest(Store store) throws StockException {
+		// calculate needs
+		Stock current = store.getInventory();
+		Stock inNeedOf = new Stock();
+		Stock properties = store.getItemProperties();
+		for (Item item : properties.getItems()) {
+			if (current.count(item) <= item.getReorderPoint()) {
+				inNeedOf.add(item, item.getReorderAmount());
+			}
+		}
+		// optimise shipment
+		Truck fridge = new RefrigeratedTruck();
+		Truck ord = new OrdinaryTruck();
+		for (Item item : inNeedOf.getItems()) {
+			if (item.getTemperature() < 10) {
+				fridge.loadCargo(item);
+			} else {
+				ord.loadCargo(item);
+			}
+		}
+		trucks.add(ord);
+		trucks.add(fridge);
+		
+	}
+	
 	/**
 	 * Constructor. Construct a new Manifest object from the
 	 * data contained in the file specified.
@@ -51,14 +78,11 @@ public class Manifest {
 		Truck truck = null;
 		Item item;
 		
-		System.out.println("creating file reader");
 		FileReader reader = new FileReader(path);
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		String line;
 		
-		System.out.println("Reading lines");
 		while ((line = bufferedReader.readLine()) != null) {
-			System.out.println(line);
 			switch (line) { // make a truck
 			case ">Ordinary":
 				truck = new RefrigeratedTruck();
@@ -133,18 +157,14 @@ public class Manifest {
 	 *
 	 */
 	public String toString() {
-		String nl = System.getProperty("line.seperator");
+//		String nl = System.getProperty("line.seperator");
+		String nl = "\n";
 		StringBuilder manifestSB = new StringBuilder();
-		
+		Map<String, Integer> itemCounts = new HashMap<String, Integer>();
+		itemCounts.put("name", 7);
 		for (Truck truck : trucks) {
-			manifestSB.append(">"+truck.getTypeToString()+nl);
-			for (Item item : truck.getCargo().getItems()) {
-				String itemName = item.getName();
-				int quantity = truck.getCargo().count(item);
-				manifestSB.append(itemName + "," + quantity + nl);
-			}//end for
+			manifestSB.append(truck.toString());
 		}//end for
-		
 		return manifestSB.toString();
 	}
 	

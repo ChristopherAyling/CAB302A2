@@ -139,11 +139,13 @@ public class UserInterface {
 				FileDialog fd = new FileDialog(frame, "Export Manifest", FileDialog.SAVE);
 				fd.setVisible(true);
 				String path = fd.getFile();
-				Manifest manifest = new Manifest();
 				try {
+					Manifest manifest = new Manifest(store);
 					manifest.writeToCSV(path);
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(frame, "Error writing manifest to CSV");
+				} catch (StockException e2) {
+					JOptionPane.showMessageDialog(frame, "Error exporting manifest. Are item properties properly loaded?");
 				}
 				
 				System.out.println("Export manifest button clicked");

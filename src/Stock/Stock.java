@@ -4,6 +4,8 @@
 package Stock;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Stock {
 
@@ -18,6 +20,12 @@ public class Stock {
 	
 	public void add(Item item) {
 		items.add(item);
+	}
+	
+	public void add(Item item, int quantity) {
+		for(int i=0; i<quantity; i++) {
+			add(item);
+		}
 	}
 	
 	public ArrayList<Item> getItems() {
@@ -66,4 +74,30 @@ public class Stock {
 		return items.size();
 	}
 
+	/**
+	 * Return a string in the form of:
+	 * 
+	 * itemName, quantity\n
+	 * itemName, quantity\n
+	 * ...
+	 * 
+	 * @return String
+	 */
+	public String toString() {
+		String nl = "\n";
+		StringBuilder sb = new StringBuilder();
+		Map<String, Integer> itemCounts = new HashMap<String, Integer>();
+		for (Item item : items) {
+			itemCounts.put(item.getName(), count(item));
+//			itemCounts.put(item.getName(), itemCounts.get(item.getName())+1);
+		}
+		for (String key : itemCounts.keySet()) {
+			sb.append(key);
+			sb.append(",");
+			sb.append(itemCounts.get(key));
+			sb.append(nl);
+		}
+		return sb.toString();
+	}
+	
 }

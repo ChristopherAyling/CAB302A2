@@ -73,5 +73,9 @@ public class Store {
 		}
 		throw new StockException("Item with name: " + itemName + " does not have properties loaded");
 	}
+	
+	public Stock getItemProperties() {
+		return itemProperties;
+	}
 
 }
