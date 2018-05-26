@@ -11,46 +11,52 @@ import Stock.*;
  */
 public class OrdinaryTruck extends Truck {
 
-	public static final int cargoMaxCapacity = 1000;
+//	public static final int cargoMaxCapacity = 1000;
 	
 	/**
 	 * Construct an Ordinary Truck.
 	 */
 	public OrdinaryTruck() {
-		
+		cargoMaxCapacity = 1000;
 	}
-	
-	// TODO change these methods to deal with possible changes to stock.
-	
+		
 	/**
 	 * Load an item into the truck. If the item requires refrigeration, raise
 	 * an exception as refigerated items may not be held by and OrdinaryTruck.
+	 * @throws StockException 
 	 */
-	public void loadCargo(Item item) {
-		cargo.add(item);
+	public void loadCargo(Item item) throws DeliveryException {
+		if (item.getTemperature() != null) {
+			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
+		}
+		super.loadCargo(item);
 	}
+	
 	
 	/**
 	 * Load stock into the truck. If an item requires refrigeration, raise
 	 * an exception as refrigerated items may not be held by an OrdinaryTruck.
+	 * @throws StockException 
 	 */
-	public void loadCargo(Stock stock) {
-		for (Item item : stock.getItems()) {
-			loadCargo(item);
+	@Override
+	public void loadCargo(Stock stock) throws DeliveryException {
+		if (stock.getColdestItemTemperature() != null) {
+			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
 		}
+		super.loadCargo(stock);
 	}
 	
 	
 	/**
-	 * Load multiple of the same item into the truck.
-	 * 
-	 * @param item
-	 * @param quantity
+	 * Load multiple of the same item into the truck. if the item
+	 * requires temperature control a DeliveryException will be thrown.
 	 */
-	public void loadCargo(Item item, int quantity) {
-		for (int i=0; i < quantity; i++) {
-			loadCargo(item);
+	@Override
+	public void loadCargo(Item item, int quantity) throws DeliveryException {
+		if (item.getTemperature() != null) {
+			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
 		}
+		super.loadCargo(item, quantity);
 	}
 
 	
@@ -64,11 +70,12 @@ public class OrdinaryTruck extends Truck {
 	 * 
 	 * @return cost of truck in Dollars
 	 */
+	@Override
 	public double getCost() {
 		return 750.0 + (0.25*this.getCargoCurrentCapacity());
 	}
 	
-	
+	@Override
 	public String getTypeToString() {
 		return "Ordinary";
 	}

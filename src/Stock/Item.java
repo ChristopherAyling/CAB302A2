@@ -7,7 +7,8 @@ package Stock;
 public class Item {
 
 	private String name;
-	private double manufacuringCost, sellPrice, temperature;
+	private double manufacuringCost, sellPrice;
+	private Double temperature;
 	private int reorderPoint, reorderAmount;
 	
 	/**
@@ -42,7 +43,7 @@ public class Item {
 		this.sellPrice = sellPrice;
 		this.reorderPoint = reorderPoint;
 		this.reorderAmount = reorderAmount;
-		this.temperature = 10;
+		this.temperature = null;
 	}
 	
 	public String getName() {

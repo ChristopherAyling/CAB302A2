@@ -19,41 +19,45 @@ import Stock.*;
  */
 public class RefrigeratedTruck extends Truck {
 
-	public int cargoMaxCapacity = 800;
-	
 	public RefrigeratedTruck() {
+		cargoMaxCapacity = 800;
 	}
 	
 	/**
-	 * Load cargo into the truck. Items which require refrigration are allowed. 
 	 * 
-	 * @param stock
+	 * @throws DeliveryException 
 	 */
-	public void loadCargo(Stock stock) {
-		for (Item item : stock.getItems()) {
-			loadCargo(item);
+	public void loadCargo(Item item) throws DeliveryException {
+		if (item.getTemperature() > 10 | item.getTemperature() < -20) {
+			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
 		}
+		super.loadCargo(item);
 	}
 	
-	/**
-	 * Load an item into the truck's cargo.
-	 * 
-	 * @param item
-	 */
-	public void loadCargo(Item item) {
-		cargo.add(item);
-	}
 	
 	/**
-	 * Load multiple of the same item into the truck's cargo.
 	 * 
-	 * @param item
-	 * @param quantity
+	 * @throws DeliveryException 
 	 */
-	public void loadCargo(Item item, int quantity) {
-		for (int i=0; i < quantity; i++) {
-			loadCargo(item);
+	@Override
+	public void loadCargo(Stock stock) throws DeliveryException {
+		if (stock.getColdestItemTemperature() > 10 | stock.getColdestItemTemperature() < -20) {
+			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
 		}
+		super.loadCargo(stock);
+	}
+	
+	
+	/**
+	 * 
+	 * @throws DeliveryException
+	 */
+	@Override
+	public void loadCargo(Item item, int quantity) throws DeliveryException {
+		if (item.getTemperature() > 10 | item.getTemperature() < -20) {
+			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
+		}
+		super.loadCargo(item, quantity);
 	}
 	
 	/**
@@ -63,9 +67,11 @@ public class RefrigeratedTruck extends Truck {
 	 * 
 	 * @return cost in dollars
 	 */
+	@Override
 	public double getCost() {
 		return 900.0 + (200*java.lang.Math.pow(0.7, (this.getTemperature()/5.0)));
 	}
+	
 	
 	/**
 	 * Returns the temperature in degrees celcius of the coldest item in the Truck. The
@@ -73,12 +79,13 @@ public class RefrigeratedTruck extends Truck {
 	 * 
 	 * @return temperature (c)
 	 */
-	public double getTemperature(){
+	@Override
+	public Double getTemperature(){
 		return this.cargo.getColdestItemTemperature();
 	}
 	
+	@Override
 	public String getTypeToString() {
 		return "Refrigerated";
 	}
-
 }

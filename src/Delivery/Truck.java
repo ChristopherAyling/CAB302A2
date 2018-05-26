@@ -11,22 +11,56 @@ import Stock.*;
 
 public abstract class Truck {
 	protected Stock cargo = new Stock();
-	
-	/**
-	 * Load stock into the Truck.
-	 *
-	 * @param stock
-	 */
-	public abstract void loadCargo(Stock stock);
-	
-	
+	protected int cargoMaxCapacity;
 	
 	/**
 	 * Load an item into the Truck.
 	 * 
 	 * @param item to load into truck
+	 * @throws DeliveryException if truck will exceed capacity.
 	 */
-	public abstract void loadCargo(Item item);
+	public void loadCargo(Item item) throws DeliveryException {
+		if (getCargoCurrentCapacity() <= cargoMaxCapacity) {
+			cargo.add(item);
+		} else {
+			throw new DeliveryException("Truck will exceed max capacity");
+		}
+	}
+	
+	
+	/**
+	 * Load multiple of the same item into the truck.
+	 * 
+	 * @param item
+	 * @param quantity
+	 * @throws DeliveryException if truck will exceed capacity.
+	 */
+	public void loadCargo(Item item, int quantity) throws DeliveryException {
+		if (quantity + getCargoCurrentCapacity() >= cargoMaxCapacity) {
+			throw new DeliveryException("Truck will exceed max capacity");
+		}
+		for (int i=0; i < quantity; i++) {
+			loadCargo(item);
+		}
+	}
+	
+	
+	/**
+	 * Load stock into the Truck.
+	 *
+	 * @param stock to load into truck.
+	 * @throws DeliveryException if truck will exceed capacity.
+	 */
+	public void loadCargo(Stock stock) throws DeliveryException {
+		if (stock.size() + getCargoCurrentCapacity() > cargoMaxCapacity) {
+			throw new DeliveryException("Truck will exceeded max capacity");
+		} else {
+			for (Item item : stock.getItems()) {
+				loadCargo(item);
+			}
+		}
+	}
+	
 	
 	
 	/**
@@ -44,9 +78,12 @@ public abstract class Truck {
 	 * @return Amount of items in the truck
 	 */
 	public int getCargoCurrentCapacity() { 
-		return cargo.size();
+		return cargoMaxCapacity - cargo.size();
 	}
 	
+	public Double getTemperature() {
+		return null;
+	}
 	
 	/**
 	 * @return Cost of Truck in Dollars

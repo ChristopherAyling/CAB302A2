@@ -14,10 +14,17 @@ package GUI;
 @SuppressWarnings("serial")
 public class CSVFormatException extends Exception {
 
+	/**
+	 * CSVFormatException
+	 */
 	public CSVFormatException() {
 		super();
 	}
-
+	
+	/**
+	 * CSVFormatException with message.
+	 * @param message
+	 */
 	public CSVFormatException(String message) {
 		super(message);
 	}

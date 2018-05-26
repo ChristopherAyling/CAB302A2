@@ -20,18 +20,18 @@ public class OrdinaryTruckTests {
 	public void testCargoMaxCapacity() {
 		truck = new OrdinaryTruck();
 		
-		assertEquals(OrdinaryTruck.cargoMaxCapacity, 1000);
+		assertEquals(truck.cargoMaxCapacity, 1000);
 	}
 	
 	@Test
-	public void testLoadCargo() {
+	public void testLoadCargo() throws DeliveryException {
 		// load that fits
 		
 		truck = new OrdinaryTruck();
 		
 		Stock cargo = new Stock();
 		
-		for(int i = 0; i < OrdinaryTruck.cargoMaxCapacity; i++) {
+		for(int i = 0; i < truck.cargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
 		
@@ -43,7 +43,7 @@ public class OrdinaryTruckTests {
 		
 		cargo = new Stock();
 		
-		for(int i = 0; i <= OrdinaryTruck.cargoMaxCapacity; i++) {
+		for(int i = 0; i <= truck.cargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
 		
@@ -61,12 +61,12 @@ public class OrdinaryTruckTests {
 	}
 	
 	@Test
-	public void testCargo() {
+	public void testCargo() throws DeliveryException {
 		truck = new OrdinaryTruck();
 		
 		Stock cargo = new Stock();
 		
-		for(int i = 0; i < OrdinaryTruck.cargoMaxCapacity; i++) {
+		for(int i = 1; i < truck.cargoMaxCapacity; i++) {
 			cargo.add(new Item("name", 1, 2, 1, 1));
 		}
 		
@@ -77,7 +77,7 @@ public class OrdinaryTruckTests {
 	}
 	
 	@Test
-	public void testCargoCurrentCapacity() {	
+	public void testCargoCurrentCapacity() throws DeliveryException {	
 		truck = new OrdinaryTruck();
 		
 		assertEquals(truck.getCargoCurrentCapacity(), 1000);  // when empty
@@ -95,7 +95,7 @@ public class OrdinaryTruckTests {
 	
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testCost() {
+	public void testCost() throws DeliveryException {
 		truck = new OrdinaryTruck();
 		
 		assertEquals(truck.getCost(), 750.0);  // when empty

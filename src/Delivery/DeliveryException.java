@@ -7,13 +7,21 @@ package Delivery;
  * @author Chris
  *
  */
+@SuppressWarnings("serial")
 public class DeliveryException extends Exception {
 
 	/**
-	 * 
+	 * DeliveryException.
 	 */
 	public DeliveryException() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
+	/**
+	 * DeliveryException with message
+	 * @param message
+	 */
+	public DeliveryException(String message) {
+		super(message);
+	}
 }

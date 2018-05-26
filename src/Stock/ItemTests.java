@@ -7,20 +7,20 @@ import org.junit.Test;
 public class ItemTests {
 
 	private String name = "Oscar";
-	private double manufacturingCost = 55.5;
-	private double sellPrice = 34.2;
-	private int reorderPoint = 10;
-	private int reorderAmount = 20;
+	private Double manufacturingCost = 55.5;
+	private Double sellPrice = 34.2;
+	private Integer reorderPoint = 10;
+	private Integer reorderAmount = 20;
 	private int temp = 8;
 	
 	@Test
 	public void noTempConstructorTest() {
-		Item itemWithoutTemp = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount);
+		new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount);
 	}
 	
 	@Test
 	public void withTempConstructorTest() {
-		Item itemWithTemp = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
+		new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
 	}
 	
 	@Test

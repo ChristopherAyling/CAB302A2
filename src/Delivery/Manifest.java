@@ -21,8 +21,6 @@ import Store.*;
  *
  */
 public class Manifest {
-
-	Store store = Store.getInstance();
 	
 	private ArrayList<Truck> trucks = new ArrayList<Truck>(); 
 	
@@ -34,7 +32,17 @@ public class Manifest {
 
 	}
 	
-	public Manifest(Store store) throws StockException {
+	
+	/**
+	 * Constructor. Construct a new Manfest object which contains trucks
+	 * that together contain the reorder amount of any items below their
+	 * reorder point.
+	 * 
+	 * @param Store to create shipment for
+	 * @throws StockException
+	 * @throws DeliveryException 
+	 */
+	public Manifest(Store store) throws DeliveryException {
 		// calculate needs
 		Stock current = store.getInventory();
 		Stock inNeedOf = new Stock();
@@ -44,7 +52,7 @@ public class Manifest {
 				inNeedOf.add(item, item.getReorderAmount());
 			}
 		}
-		// optimise shipment
+		// TODO optimise shipment
 		Truck fridge = new RefrigeratedTruck();
 		Truck ord = new OrdinaryTruck();
 		for (Item item : inNeedOf.getItems()) {
@@ -72,9 +80,11 @@ public class Manifest {
 	 * 
 	 * @param path path to a file containing manifest data.
 	 * @throws StockException 
+	 * @throws DeliveryException 
 	 *
 	 */
-	public Manifest(String path) throws IOException, CSVFormatException, StockException {
+	public Manifest(String path) throws IOException, CSVFormatException, StockException, DeliveryException {
+		Store store = Store.getInstance();
 		Truck truck = null;
 		Item item;
 		

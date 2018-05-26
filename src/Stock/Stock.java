@@ -60,12 +60,17 @@ public class Stock {
 		return itemCount;
 	}
 	
-	public double getColdestItemTemperature() {
-		double coldestTemperature = Double.MAX_VALUE;
+	public Double getColdestItemTemperature() {
+		Double coldestTemperature = Double.MAX_VALUE;
 		for(Item item : items) {
-			if(item.getTemperature() < coldestTemperature) {
+			if (item.getTemperature() == null) {
+				continue;
+			} else if(item.getTemperature() < coldestTemperature) {
 				coldestTemperature = item.getTemperature();
 			}
+		}
+		if (coldestTemperature == Double.MAX_VALUE) {
+			coldestTemperature = null;
 		}
 		return coldestTemperature;
 	}

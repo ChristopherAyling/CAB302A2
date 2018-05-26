@@ -147,7 +147,8 @@ public class UserInterface {
 					manifest.writeToCSV(path);
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(frame, "Error writing manifest to CSV", "Error", JOptionPane.ERROR_MESSAGE);
-				} catch (StockException e2) {
+				} catch (DeliveryException e2) {
+					System.out.println(e2.getMessage());
 					JOptionPane.showMessageDialog(frame, "Error exporting manifest. Are item properties properly loaded?", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -182,6 +183,9 @@ public class UserInterface {
 					JOptionPane.showMessageDialog(frame, "CSV in wrong format", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (StockException e3) {
 					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?", "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (DeliveryException e1) {
+					System.out.println(e1.getMessage());
+					JOptionPane.showMessageDialog(frame, "A delivery error occured.", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				System.out.println("manifest should've been loaded!");
 			}//end action performed
