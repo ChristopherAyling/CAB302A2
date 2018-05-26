@@ -52,7 +52,7 @@ public class Manifest {
 				inNeedOf.add(item, item.getReorderAmount());
 			}
 		}
-		// TODO optimise shipment
+		// TODO optimize shipment
 		Truck fridge = new RefrigeratedTruck();
 		Truck ord = new OrdinaryTruck();
 		for (Item item : inNeedOf.getItems()) {
@@ -140,6 +140,10 @@ public class Manifest {
 			cost += truck.getCost();
 		}
 		return cost;
+	}
+	
+	public ArrayList<Truck> getTrucks(){
+		return trucks;
 	}
 	
 	/**

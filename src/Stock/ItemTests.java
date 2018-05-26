@@ -2,6 +2,8 @@ package Stock;
 
 import static org.junit.Assert.*;
 
+import java.util.OptionalInt;
+
 import org.junit.Test;
 
 public class ItemTests {
@@ -62,7 +64,7 @@ public class ItemTests {
 	@Test
 	public void getTempNoTempTest() {
 		Item item = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount);
-		assertEquals(temp, 10);
+		assertEquals(null, item.getTemperature());
 	}
 	
 	@Test 
@@ -73,6 +75,5 @@ public class ItemTests {
 		assertTrue(item1.equals(item1));
 		assertTrue(item1.equals(item2));
 		assertTrue(item2.equals(item1));
-		
 	}
 }

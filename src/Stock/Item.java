@@ -3,6 +3,7 @@
  */
 package Stock;
 
+import java.util.OptionalDouble;
 
 public class Item {
 
@@ -64,6 +65,14 @@ public class Item {
 	
 	public Integer getReorderAmount() {
 		return this.reorderAmount;
+	}
+	
+	public boolean requiresTemperatureControl() {
+		if (temperature == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public Double getTemperature() {

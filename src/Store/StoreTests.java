@@ -15,7 +15,6 @@ public class StoreTests {
 	private Store store = null, store2 = null;
 	private String name = "Family Mart";
 	private double capital = 7283.27;
-	private Stock inventory = new Stock();
 	
 	
 	@Before
@@ -41,17 +40,17 @@ public class StoreTests {
 		store.setCapital(capital);
 		
 		// test getter
-		assertEquals(capital, store.getCapital());
+		assertEquals(capital, store.getCapital(), 0.001);
 		
 		// test can handle no change, increments and decrements
 		store.addCapital(0.0);
-		assertEquals(capital, store.getCapital());
+		assertEquals(capital, store.getCapital(), 0.001);
 
 		store.addCapital(1.0);
-		assertEquals(capital+1.0, store.getCapital());
+		assertEquals(capital+1.0, store.getCapital(), 0.001);
 
 		store.addCapital(-1.0);
-		assertEquals(capital-1.0, store.getCapital());
+		assertEquals(capital, store.getCapital(), 0.001);
 	}
 
 	@Test
@@ -61,18 +60,18 @@ public class StoreTests {
 		assertEquals("$100,000.00", store.displayCapital());
 		// test negative
 		store.setCapital(-10.57);
-		assertEquals("$-10.57", store.displayCapital());
+		assertEquals("-$10.57", store.displayCapital());
 		// test 0
 		store.setCapital(0);
 		assertEquals("$0.00", store.displayCapital());
 		// test rounding
 		store.setCapital(1.1111111); // should round down
-		assertEquals("$1.10", store.displayCapital());
+		assertEquals("$1.11", store.displayCapital());
 		
 		store.setCapital(1.99999999); // should round up
 		assertEquals("$2.00", store.displayCapital());
 		
-		// test comma seperation
+		// test comma separation
 		store.setCapital(1000000000);
 		assertEquals("$1,000,000,000.00", store.displayCapital());
 	}

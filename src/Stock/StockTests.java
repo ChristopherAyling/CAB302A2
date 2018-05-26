@@ -91,7 +91,7 @@ public class StockTests {
 	
 	@Test
 	public void getColdestItemNoItemsTest() {
-		assertEquals(stock.getColdestItemTemperature(), 10.0);
+		assertEquals(stock.getColdestItemTemperature(), new Double(10.0));
 	}
 	
 	@Test

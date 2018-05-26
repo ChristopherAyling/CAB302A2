@@ -44,10 +44,10 @@ public class Store {
 	}
 	
 	public void addCapital(double capital) {
-		this.capital += capital;
+		this.capital = this.capital + capital;
 	}
 	
-	public Double getCapital() {
+	public double getCapital() {
 		return this.capital;
 	}
 	
