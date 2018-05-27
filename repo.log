@@ -1,7 +1,7 @@
 Chris Ayling (1):
       Initial commit
 
-Christopher (9):
+Christopher (12):
       slight changes to some variables, tests passing in all but trucks
       refactored some tests and fixed Truck's children
       fixed manifest exporting item counts and refactored some tests.
@@ -11,6 +11,9 @@ Christopher (9):
       updated truck costs and tests to reflect.
       added success messages and removed some printlns
       Improved comments and generated javadoc.
+      added myself as author the the files I authored. included git log.
+      added more manifest tests, made manifest(Store) code better
+      increased coverage of tests for store and stock
 
 Christopher Ayling (33):
       added provided docs
@@ -58,6 +61,9 @@ Lucas Wickham (9):
       Fixed spelling in RefrigeratedTruckTests, added item property csv parsing in GUI
       Added column names to inventory table, put table in scroll pane
 
+* 102a2a3 increased coverage of tests for store and stock
+* 346d7be added more manifest tests, made manifest(Store) code better
+* 5a8c177 added myself as author the the files I authored. included git log.
 * caf96f5 Improved comments and generated javadoc.
 * 7a2abcf added success messages and removed some printlns
 * 228c291 updated truck costs and tests to reflect.
@@ -116,6 +122,30 @@ Lucas Wickham (9):
 * e592455 wrote stub test files
 * d77bbd8 added provided docs
 * 6f3c73c Initial commit
+commit 102a2a3f10e690f5d5cb499300fdc4a3741b0c53
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 20:11:28 2018 +1000
+
+    increased coverage of tests for store and stock
+
+ 4 files changed, 141 insertions(+), 5 deletions(-)
+
+commit 346d7beaf0a98cdf1e9005c0d4fc21f3fba7797a
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 19:27:18 2018 +1000
+
+    added more manifest tests, made manifest(Store) code better
+
+ 3 files changed, 38 insertions(+), 30 deletions(-)
+
+commit 5a8c17714bfabe95c8428c59ca13709e9e79ff8c
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 18:45:10 2018 +1000
+
+    added myself as author the the files I authored. included git log.
+
+ 11 files changed, 623 insertions(+), 53 deletions(-)
+
 commit caf96f5b8d3fbb376f65926d8e8bc2c35e165ccb
 Author: Christopher <chris.ayling.360@gmail.com>
 Date:   Sun May 27 17:03:15 2018 +1000

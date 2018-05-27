@@ -60,9 +60,13 @@ public class UserInterface {
 
         //add buttons
         JButton loadItemPropertiesButton = new JButton("Load Item Properties");
+        loadItemPropertiesButton.setToolTipText("Initialises item properties from a file.");
         JButton exportManifestButton = new JButton("Export Manifest");
+        exportManifestButton.setToolTipText("Export a manifest based on current inventory.");
         JButton loadManifestButton = new JButton("Load Manifest");
+        loadManifestButton.setToolTipText("Load a manifest from a file.");
         JButton loadSalesLogButton = new JButton("Load Sales Log");
+        loadSalesLogButton.setToolTipText("Load a sales log from a file.");
 
         // add ActionListeners
         
@@ -190,7 +194,7 @@ public class UserInterface {
         
         loadSalesLogButton.addActionListener(new ActionListener() {
         	/**
-        	 * Load in a sales log; increases capital and  inventory.
+        	 * Load in a sales log; increases capital and inventory.
         	 * 
         	 * @author Lucas Wickham
         	 * 
