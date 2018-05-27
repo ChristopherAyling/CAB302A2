@@ -114,7 +114,14 @@ public class UserInterface {
 			        
 			        // create and add table to centre
 			        String[] columnNames = {"Name", "Quantity", "Manufactuing Cost", "Sell Price", "Reorder Point", "Reorder Amount", "Temperature"};
-			        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+			        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0){
+
+			            @Override
+			            public boolean isCellEditable(int row, int column) {
+			               //all cells false
+			               return false;
+			            }
+			        };
 			        for(Item item : store.getItemProperties().getItems()) {
 			        	tableModel.addRow(new Object[]{item.getName(), 0, item.getManufacturingCost(), item.getSellPrice(), item.getReorderPoint(), item.getReorderAmount(), item.getTemperature()});
 			        }
@@ -242,7 +249,7 @@ public class UserInterface {
         frame.pack();
         
         //Display the window. 
-        frame.setPreferredSize(new Dimension(800, 800)); //TODO find better dimensions
+        frame.setPreferredSize(new Dimension(800, 500)); //TODO find better dimensions
         frame.pack(); 
         frame.setVisible(true);
 	}
