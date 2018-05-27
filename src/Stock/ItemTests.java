@@ -72,6 +72,18 @@ public class ItemTests {
 	}
 	
 	@Test
+	public void requiresTempControlTrueTest() {
+		Item item = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
+		assertTrue(item.requiresTemperatureControl());
+	}
+	
+	@Test
+	public void requiresTempControlTrueFalse() {
+		Item item = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount);
+		assertFalse(item.requiresTemperatureControl());
+	}
+	
+	@Test
 	public void equalsTest() {
 		Item item1 = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
 		Item item2 = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);

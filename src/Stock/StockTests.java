@@ -32,12 +32,21 @@ public class StockTests {
 	public void addNoTempTest() {
 		stock.add(noTempItem1);
 		stock.add(noTempItem2);
+		stock.getItems().contains(noTempItem1);
+		stock.getItems().contains(noTempItem2);
 	}
 	
 	@Test
 	public void addWithTempTest() {
 		stock.add(tempItem1);
 		stock.add(tempItem2);
+		stock.getItems().contains(tempItem1);
+		stock.getItems().contains(tempItem2);
+	}
+	
+	@Test
+	public void addNTest() {
+		stock.add(noTempItem1, 1);
 	}
 	
 	@Test
@@ -57,6 +66,30 @@ public class StockTests {
 	public void removeOneTest() {
 		stock.add(tempItem1);
 		stock.remove(tempItem1);
+		assertEquals(0, stock.count(tempItem1));
+	}
+	
+	@Test
+	public void removeAllTest() {
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.remove(tempItem1);
+		assertEquals(0, stock.count(tempItem1));
+	}
+	
+	@Test
+	public void removeAllWithOthersTest() {
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.add(noTempItem1);
+		stock.add(noTempItem1);
+		stock.add(noTempItem1);
+		stock.remove(tempItem1);
+		stock.add(noTempItem1);
 		assertEquals(0, stock.count(tempItem1));
 	}
 	
@@ -118,25 +151,89 @@ public class StockTests {
 	}
 	
 	@Test
-	public void getColdestItemNoItemsTest() {
+	public void getColdestItemTempNoItemsTest() {
 		assertEquals(stock.getColdestItemTemperature(), null);
 	}
 	
 	@Test
-	public void getColdestItemDryGoodsTest() {
+	public void getColdestItemTempNoTempTest() {
+		stock.add(noTempItem1);
+		assertEquals(stock.getColdestItemTemperature(), null);
+	}
+	
+	@Test
+	public void getColdestItemTemp1TempTest() {
+		stock.add(tempItem1);
+		assertEquals(stock.getColdestItemTemperature(), tempItem1.getTemperature());
+	}
+	
+	@Test
+	public void getColdestItemTemp2DifferentTempTest() {
+		stock.add(tempItem1);
+		stock.add(tempItem2); // <- colder one
+		assertEquals(stock.getColdestItemTemperature(), tempItem2.getTemperature());
+	}
+	
+	@Test
+	public void getColdestItemTempMixedMulti() {
+		stock.add(noTempItem1);
+		stock.add(tempItem1);
+		stock.add(tempItem2); // <- colder one
+		stock.add(noTempItem1);
+		assertEquals(stock.getColdestItemTemperature(), tempItem2.getTemperature());
+	}
+	
+	
+	@Test
+	public void getColdestItemNoItemsTest() {
+		assertEquals(stock.getColdestItem(), null);
+	}
+	
+	@Test
+	public void getColdestItemNoTempTest() {
+		stock.add(noTempItem1);
+		assertEquals(stock.getColdestItem(), null);
+	}
+	
+	@Test
+	public void getColdestItem1TempTest() {
+		stock.add(tempItem1);
+		assertEquals(stock.getColdestItem(), tempItem1);
+	}
+	
+	@Test
+	public void getColdestItem2DifferentTempTest() {
+		stock.add(tempItem1);
+		stock.add(tempItem2); // <- colder one
+		assertEquals(stock.getColdestItem(), tempItem2);
+	}
+	
+	@Test
+	public void getColdestItemMixedMulti() {
+		stock.add(noTempItem1);
+		stock.add(tempItem1);
+		stock.add(tempItem2); // <- colder one
+		stock.add(noTempItem1);
+		assertEquals(stock.getColdestItem(), tempItem2);
+	}
+	
+	
+	
+	@Test
+	public void getColdestItemTempDryGoodsTest() {
 		stock.add(noTempItem1);
 		assertEquals(stock.getColdestItemTemperature(), noTempItem1.getTemperature());
 	}
 	
 	@Test
-	public void getColdestItemTest() {
+	public void getColdestItemTempTest() {
 		stock.add(tempItem1);
 		stock.add(tempItem2);
 		assertEquals(stock.getColdestItemTemperature(), tempItem2.getTemperature());
 	}
 	
 	@Test
-	public void getColdestItemTooColdTest() {
+	public void getColdestItemTempTooColdTest() {
 		stock.add(tempItem3);
 		assertEquals(stock.getColdestItemTemperature(), tempItem3.getTemperature());
 	}
@@ -194,4 +291,5 @@ public class StockTests {
 		assertTrue(s1.equals(s2));
 		assertTrue(s2.equals(s1));
 	}
+
 }

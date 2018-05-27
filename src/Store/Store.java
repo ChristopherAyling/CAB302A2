@@ -63,7 +63,7 @@ public class Store {
 		this.itemProperties.add(item);
 	}
 	
-	private Item copyItem(Item item) {
+	protected Item copyItem(Item item) {
 		if (item.getTemperature() == null) {
 			return new Item(item.getName(), item.getManufacturingCost(), item.getSellPrice(), item.getReorderPoint(), item.getReorderAmount());
 		}

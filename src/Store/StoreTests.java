@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import Stock.Item;
+import Stock.StockException;
+
 
 /**
  * Test cases for Store.
@@ -83,4 +86,27 @@ public class StoreTests {
 		store.getInventory();
 	}
 	
+	@Test
+	public void copyItemWTempTest() {
+		Item item = new Item("no temp item", 1, 1, 1, 1);
+		assertEquals(item, store.copyItem(item));
+	}
+	
+	@Test
+	public void copyItemWOTempTest() {
+		Item item = new Item("no temp item", 1, 1, 1, 1, 1);
+		assertEquals(item, store.copyItem(item));
+	}
+	
+	@Test(expected = StockException.class)
+	public void getItemPropertiesThrowTest() throws StockException {
+		store.getItemProperties("I don't exist in the store");
+	}
+	
+	@Test
+	public void getItemPropertiesTest() throws StockException {
+		Item item = new Item("exists", 1, 1, 1, 1);
+		store.setItemProperties(item);
+		store.getItemProperties(item.getName());
+	}
 }
