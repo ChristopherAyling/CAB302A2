@@ -5,7 +5,7 @@ import Stock.*;
 /**
  * Truck abstract class. Can hold items and calculate a cost.
  * 
- * @author Chris
+ * @author Christopher Ayling
  *
  */
 public abstract class Truck {

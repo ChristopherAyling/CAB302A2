@@ -38,23 +38,9 @@ public class Stock {
 			items.remove(itemToRemove);
 			removed++;
 		}
-		
-//		for(int i = 0; i < number; i++) {
-//			for(Item item : items) {
-//				if(itemToRemove.equals(item)) {
-//					items.remove(item);
-//				}
-//			}
-//		}
 	}
 	
 	public void remove(Item itemToRemove) {
-//		for(Item item : items) {
-//			if(itemToRemove.equals(item)) {
-//				items.remove(item);
-//			}
-//		}
-//		
 		while (items.contains(itemToRemove)) {
 			items.remove(itemToRemove);
 		}

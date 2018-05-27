@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * 
  * User Interface for a supermarket inventory system
  * 
- * @author Chris and Lucas
+ * @author Christopher Ayling and Lucas Wickham
  *
  */
 public class UserInterface {
@@ -31,7 +31,7 @@ public class UserInterface {
 	public static Store store = Store.getInstance();
 	
 	/**
-	 * Constructor
+	 * Construct a new UserInterface.
 	 */
 	public UserInterface() {
 	}
@@ -73,10 +73,11 @@ public class UserInterface {
         	 * 
         	 * All item quantities must be zero.
         	 * 
+        	 * @author Lucas Wickham
+        	 * 
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Load Item Properties
 				System.out.println("Item properties button clicked");
 				FileDialog fd = new FileDialog(frame, "Load item properties", FileDialog.LOAD);
 				fd.setVisible(true);
@@ -119,6 +120,9 @@ public class UserInterface {
         exportManifestButton.addActionListener(new ActionListener() {
         	/**
         	 * Export a manifest based on current inventory.
+        	 * 
+        	 * @author Christopher Ayling
+        	 * 
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -147,6 +151,9 @@ public class UserInterface {
         loadManifestButton.addActionListener(new ActionListener() {
         	/**
         	 * Load in a manifest; decreases capital and increases inventory.
+        	 * 
+        	 * @author Christopher Ayling
+        	 * 
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -182,6 +189,9 @@ public class UserInterface {
         loadSalesLogButton.addActionListener(new ActionListener() {
         	/**
         	 * Load in a sales log; increases capital and  inventory.
+        	 * 
+        	 * @author Lucas Wickham
+        	 * 
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {

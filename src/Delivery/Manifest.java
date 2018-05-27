@@ -23,7 +23,7 @@ import Store.*;
  * CSV file or an instance of Store.Store. Manifests have the ability
  * to calculate their cost.
  * 
- * @author Chris
+ * @author Christopher Ayling
  *
  */
 public class Manifest {
@@ -87,7 +87,21 @@ public class Manifest {
 				}
 			} // end while
 		} // end while
-		trucks.add(currentColdTruck);
+		
+		if (currentColdTruck.getCargo().size() != 0) {
+			while (ordItems.size() > 0) {
+				try {
+					Item itemToAdd = ordItems.getItems().get(0);
+					currentColdTruck.loadCargo(itemToAdd);
+					ordItems.remove(itemToAdd, 1);
+				} catch(DeliveryException e) {
+					trucks.add(currentColdTruck);
+					break;
+				}
+			}
+			trucks.add(currentColdTruck);
+		}
+		
 
 		OrdinaryTruck currentOrdinaryTruck = new OrdinaryTruck();
 		while (ordItems.size() > 0) { // for every left over ordinary item

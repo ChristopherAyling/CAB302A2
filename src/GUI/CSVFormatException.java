@@ -8,7 +8,7 @@ package GUI;
  * 
  * The expected format of CSVs is covered in the program requirements.
  * 
- * @author Chris
+ * @author Christopher Ayling
  *
  */
 @SuppressWarnings("serial")

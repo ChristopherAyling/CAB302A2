@@ -1,0 +1,536 @@
+Chris Ayling (1):
+      Initial commit
+
+Christopher (9):
+      slight changes to some variables, tests passing in all but trucks
+      refactored some tests and fixed Truck's children
+      fixed manifest exporting item counts and refactored some tests.
+      fixed remove methods in Stock.java did some work to optimize manifests
+      Removed an unneccessary test
+      optimal manifest creation implemented. Wrote more tests for trucks.
+      updated truck costs and tests to reflect.
+      added success messages and removed some printlns
+      Improved comments and generated javadoc.
+
+Christopher Ayling (33):
+      added provided docs
+      wrote stub test files
+      started writing unit tests for lucas
+      added more tests for stock and item, more to do/fix for store I feel
+      added chris's stub classes
+      Implemented methods for the trucks, wrote more tests for stock and item
+      Refactored ordTruck and fridgeTruck to take advantage of abstract Truck
+      Created GUI skeleton.
+      Added marking rubric PDF and added listener stub classes for handling button presses in the GUI.
+      added more tests to StoreTests.java for checking the displaying of capital.
+      added comments to classes and methods
+      add tests for store.displayCapital
+      Added comments to event listeners in the GUI.
+      Implemented truck.getTypeToString method.
+      Worked on implementing reading a manifest from a CSV. Overloaded loadCargo method for OrdinaryTruck.
+      Updated comments, implemented the manifest in the gui some more.
+      Merge branch 'master' of https://github.com/ChristopherAyling/CAB302A2.git
+      made getColdestItem return a values, slight changes in Manifest and Stock
+      fixed variables names in StockTests, added semicolon in StoreTests
+      added a whole bunch of broken code to the GUI, added a few more comments in GUI
+      .
+      merge
+      fixed some issues in gui, implemented button disabling/enabling
+      fixed singleton implementation, did some more for loading manifest GUI
+      fixed loading into trucks, need to add temperature checking again though
+      doing debugging for loading manifests. slight fixes elsewhere and implemented Stock.size() and some more comments
+      I didn't change anything
+      Merge branch 'master' of https://github.com/ChristopherAyling/CAB302A2.git
+      Added toString methods to Stock and Truck. Manifests now save correctly.
+      updated files with those provided on blackboard.
+      trucks are being handled properly by Manifest(String) now. Cost of manifest is now shown in a success dialog when loading in.
+      removed unused constructor from Manifest
+      updated tests and used inheritence better for loading trucks
+
+Lucas Wickham (9):
+      Added unit tests for Chris
+      added Item class
+      Created Stock and Store, updated method names in test classes
+      Made ItemTests equalsTest() public
+      Changed methods from returning primitives to objects(so their methods can be used), added displayCapital to Store, added missing semicolon to StoreTests, fixed comment spelling in Item
+      Made Store constructor create new Stock for inventory
+      Added methods to Store, added StockException
+      Fixed spelling in RefrigeratedTruckTests, added item property csv parsing in GUI
+      Added column names to inventory table, put table in scroll pane
+
+* caf96f5 Improved comments and generated javadoc.
+* 7a2abcf added success messages and removed some printlns
+* 228c291 updated truck costs and tests to reflect.
+* 8501f40 optimal manifest creation implemented. Wrote more tests for trucks.
+* c714bd4 Removed an unneccessary test
+* 5bcd346 fixed remove methods in Stock.java did some work to optimize manifests
+* 0ca9ac7 fixed manifest exporting item counts and refactored some tests.
+* 2556bb8 refactored some tests and fixed Truck's children
+* 71f8496 slight changes to some variables, tests passing in all but trucks
+* 5f0cd1a updated tests and used inheritence better for loading trucks
+* 89bdba2 removed unused constructor from Manifest
+* 1571bd9 trucks are being handled properly by Manifest(String) now. Cost of manifest is now shown in a success dialog when loading in.
+* cb4a46f updated files with those provided on blackboard.
+* 9137e23 Added toString methods to Stock and Truck. Manifests now save correctly.
+*   684819c Merge branch 'master' of https://github.com/ChristopherAyling/CAB302A2.git
+|\  
+| * 556d963 Added column names to inventory table, put table in scroll pane
+* | 49dd065 I didn't change anything
+|/  
+* d3a8e87 doing debugging for loading manifests. slight fixes elsewhere and implemented Stock.size() and some more comments
+* 9e69940 fixed loading into trucks, need to add temperature checking again though
+* 52f9bf1 fixed singleton implementation, did some more for loading manifest GUI
+* 787507e fixed some issues in gui, implemented button disabling/enabling
+*   cffc7f8 merge
+|\  
+| * a1bcbe1 Fixed spelling in RefrigeratedTruckTests, added item property csv parsing in GUI
+| * 2b39d4e Added methods to Store, added StockException
+| * 0ca2f87 Made Store constructor create new Stock for inventory
+| * 79cbcc1 Changed methods from returning primitives to objects(so their methods can be used), added displayCapital to Store, added missing semicolon to StoreTests, fixed comment spelling in Item
+| * 9df4459 Made ItemTests equalsTest() public
+* | a9e5833 .
+* | e0e7011 added a whole bunch of broken code to the GUI, added a few more comments in GUI
+* | 6351150 fixed variables names in StockTests, added semicolon in StoreTests
+* | 8fe2b83 made getColdestItem return a values, slight changes in Manifest and Stock
+* |   8f8e469 Merge branch 'master' of https://github.com/ChristopherAyling/CAB302A2.git
+|\ \  
+| |/  
+| * bd81b36 Created Stock and Store, updated method names in test classes
+* | 0cf915e Updated comments, implemented the manifest in the gui some more.
+|/  
+* 6398613 Worked on implementing reading a manifest from a CSV. Overloaded loadCargo method for OrdinaryTruck.
+* bde9e12 Implemented truck.getTypeToString method.
+* 76dd154 Added comments to event listeners in the GUI.
+* fb71110 add tests for store.displayCapital
+* 1272ff4 added comments to classes and methods
+* d5358f6 added more tests to StoreTests.java for checking the displaying of capital.
+* 9a8b674 Added marking rubric PDF and added listener stub classes for handling button presses in the GUI.
+* 8a42499 Created GUI skeleton.
+* b2056e4 Refactored ordTruck and fridgeTruck to take advantage of abstract Truck
+* 390cfe4 added Item class
+* d6978bf Implemented methods for the trucks, wrote more tests for stock and item
+* 8b1172b added chris's stub classes
+* b2cbf31 Added unit tests for Chris
+* 0ccc8b5 added more tests for stock and item, more to do/fix for store I feel
+* b7602cf started writing unit tests for lucas
+* e592455 wrote stub test files
+* d77bbd8 added provided docs
+* 6f3c73c Initial commit
+commit caf96f5b8d3fbb376f65926d8e8bc2c35e165ccb
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 17:03:15 2018 +1000
+
+    Improved comments and generated javadoc.
+
+ 123 files changed, 51381 insertions(+), 160 deletions(-)
+
+commit 7a2abcf15ee00454bcade8f0c82eff3c3e7b1699
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 15:27:50 2018 +1000
+
+    added success messages and removed some printlns
+
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+
+commit 228c291938904863f7f428b3b87b8d37d34fa0cd
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 15:18:50 2018 +1000
+
+    updated truck costs and tests to reflect.
+
+ 9 files changed, 51 insertions(+), 23 deletions(-)
+
+commit 8501f4050fcdefb1d05ce8ca79d60e867fa25978
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 14:38:10 2018 +1000
+
+    optimal manifest creation implemented. Wrote more tests for trucks.
+
+ 7 files changed, 146 insertions(+), 54 deletions(-)
+
+commit c714bd424153d31dd23e41a904453b019beaccff
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 12:41:57 2018 +1000
+
+    Removed an unneccessary test
+
+ 4 files changed, 40 insertions(+), 18 deletions(-)
+
+commit 5bcd34669ce805e449a8b1e0f7a1d77f4d533a4d
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 12:01:10 2018 +1000
+
+    fixed remove methods in Stock.java did some work to optimize manifests
+
+ 3 files changed, 95 insertions(+), 15 deletions(-)
+
+commit 0ca9ac708f72260de8ccb67e3825b5a5f58907ce
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 11:06:04 2018 +1000
+
+    fixed manifest exporting item counts and refactored some tests.
+
+ 6 files changed, 289 insertions(+), 271 deletions(-)
+
+commit 2556bb8c359c61949a7de08eab44ea8c17d7f862
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 09:50:32 2018 +1000
+
+    refactored some tests and fixed Truck's children
+
+ 7 files changed, 597 insertions(+), 541 deletions(-)
+
+commit 71f8496e78b7b94bae2424ede797c8ecc7eb0460
+Author: Christopher <chris.ayling.360@gmail.com>
+Date:   Sun May 27 08:22:38 2018 +1000
+
+    slight changes to some variables, tests passing in all but trucks
+
+ 8 files changed, 821 insertions(+), 808 deletions(-)
+
+commit 5f0cd1acdcdf9ed9aa62d26a2679bbe40854b25f
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Sat May 26 22:38:43 2018 +1000
+
+    updated tests and used inheritence better for loading trucks
+
+ 14 files changed, 194 insertions(+), 115 deletions(-)
+
+commit 89bdba2576e9a6fc9d831d113795dc2b58c9080c
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Sat May 26 20:50:01 2018 +1000
+
+    removed unused constructor from Manifest
+
+ 2 files changed, 85 insertions(+), 101 deletions(-)
+
+commit 1571bd95cc0735df22696d787631907cef4d5c4f
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Sat May 26 20:48:47 2018 +1000
+
+    trucks are being handled properly by Manifest(String) now. Cost of
+    manifest is now shown in a success dialog when loading in.
+
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+commit cb4a46fac27dee5cb36839e91a28dbad6a2d02bf
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Sat May 26 17:02:19 2018 +1000
+
+    updated files with those provided on blackboard.
+
+ 4 files changed, 22 insertions(+), 16 deletions(-)
+
+commit 9137e23522d225533d4374a598aef5e536d4181b
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Sat May 26 16:17:58 2018 +1000
+
+    Added toString methods to Stock and Truck. Manifests now save correctly.
+
+ 5 files changed, 95 insertions(+), 13 deletions(-)
+
+commit 684819ca27e137de13b9dbceddff679016194d65
+Merge: 49dd065 556d963
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Fri May 25 22:45:08 2018 +1000
+
+    Merge branch 'master' of https://github.com/ChristopherAyling/CAB302A2.git
+
+commit 49dd065d469a65837f5037139bef1b83c96c6471
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Fri May 25 22:44:55 2018 +1000
+
+    I didn't change anything
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 556d963191d2b009ca3fe6adb16de1447921f0c7
+Author: Lucas Wickham <wickhamlr@gmail.com>
+Date:   Fri May 25 02:29:10 2018 +1000
+
+    Added column names to inventory table, put table in scroll pane
+
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit d3a8e87f6a4f8772e0887246a5d4a518344377d6
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Thu May 24 17:24:18 2018 +1000
+
+    doing debugging for loading manifests. slight fixes elsewhere and
+    implemented Stock.size() and some more comments
+
+ 8 files changed, 139 insertions(+), 133 deletions(-)
+
+commit 9e699409d6cdf489600ae3c09944a80ade4a6733
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Thu May 24 16:52:06 2018 +1000
+
+    fixed loading into trucks, need to add temperature checking again though
+
+ 5 files changed, 38 insertions(+), 18 deletions(-)
+
+commit 52f9bf1825ef9606ea84cfd0bc3eae8db4e4f946
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Thu May 24 16:24:09 2018 +1000
+
+    fixed singleton implementation, did some more for loading manifest GUI
+
+ 4 files changed, 111 insertions(+), 96 deletions(-)
+
+commit 787507ecbd9e0e3ae3f1352463251846c0e152d2
+Author: Christopher Ayling <chris.ayling@blackbook.ai>
+Date:   Thu May 24 06:03:29 2018 +0100
+
+    fixed some issues in gui, implemented button disabling/enabling
+
+ 1 file changed, 17 insertions(+), 92 deletions(-)
+
+commit cffc7f8dd70696802686dcc902f6e965187a351d
+Merge: a9e5833 a1bcbe1
+Author: Christopher Ayling <chris.ayling@blackbook.ai>
+Date:   Thu May 24 05:42:48 2018 +0100
+
+    merge
+
+commit a9e58334a3a87dbe59a65a5c153e3757d24ba7e0
+Author: Christopher Ayling <chris.ayling@blackbook.ai>
+Date:   Thu May 24 05:41:01 2018 +0100
+
+    .
+
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+
+commit e0e7011487a541ff59830905002acbdbfc91bb7c
+Author: Christopher Ayling <chris.ayling@blackbook.ai>
+Date:   Thu May 24 05:40:10 2018 +0100
+
+    added a whole bunch of broken code to the GUI, added a few more comments in GUI
+
+ 1 file changed, 132 insertions(+), 14 deletions(-)
+
+commit 6351150d5d0caa7042c6b98a65cc065e705e20c0
+Author: Christopher Ayling <chris.ayling@blackbook.ai>
+Date:   Thu May 24 05:39:29 2018 +0100
+
+    fixed variables names in StockTests, added semicolon in StoreTests
+
+ 2 files changed, 13 insertions(+), 11 deletions(-)
+
+commit 8fe2b838f736719392c3ddc47519677311388cd2
+Author: Christopher Ayling <chris.ayling@blackbook.ai>
+Date:   Thu May 24 05:38:24 2018 +0100
+
+    made getColdestItem return a values, slight changes in Manifest and Stock
+
+ 3 files changed, 11 insertions(+), 5 deletions(-)
+
+commit a1bcbe1fa3becc84eb6578834e3644259a8f6e96
+Author: Lucas Wickham <wickhamlr@gmail.com>
+Date:   Wed May 23 21:06:34 2018 +1000
+
+    Fixed spelling in RefrigeratedTruckTests, added item property csv
+    parsing in GUI
+
+ 4 files changed, 36 insertions(+), 5 deletions(-)
+
+commit 2b39d4e18dd41d126a6d1d174cd01a25881f2f5e
+Author: Lucas Wickham <wickhamlr@gmail.com>
+Date:   Wed May 23 20:28:28 2018 +1000
+
+    Added methods to Store, added StockException
+
+ 7 files changed, 57 insertions(+), 4 deletions(-)
+
+commit 0ca2f87b6f6332aa92e5c01f085cf45439107cf8
+Author: Lucas Wickham <wickhamlr@gmail.com>
+Date:   Wed May 23 13:00:53 2018 +1000
+
+    Made Store constructor create new Stock for inventory
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 79cbcc11b5858de08b24f76eeb77b31544c2d12c
+Author: Lucas Wickham <wickhamlr@gmail.com>
+Date:   Wed May 23 12:53:40 2018 +1000
+
+    Changed methods from returning primitives to objects(so their methods can be used), added displayCapital to Store, added missing semicolon to StoreTests, fixed comment spelling in Item
+
+ 4 files changed, 15 insertions(+), 9 deletions(-)
+
+commit 9df4459eaa7846d6ec77861f4e22f72b1634f4b9
+Author: Lucas Wickham <wickhamlr@gmail.com>
+Date:   Wed May 23 12:35:40 2018 +1000
+
+    Made ItemTests equalsTest() public
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 8f8e469242c7945f2aff636d3e2b2a8a2a25adea
+Merge: 0cf915e bd81b36
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Tue May 22 17:17:48 2018 +1000
+
+    Merge branch 'master' of https://github.com/ChristopherAyling/CAB302A2.git
+
+commit 0cf915efe2df84f125c1a4bc7b38723d0b9d7599
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Tue May 22 17:17:29 2018 +1000
+
+    Updated comments, implemented the manifest in the gui some more.
+
+ 5 files changed, 78 insertions(+), 26 deletions(-)
+
+commit bd81b365a676ff67554ee600e2c60be95d9a6f65
+Author: Lucas Wickham <lucas.wickham@blackbook.ai>
+Date:   Tue May 22 17:08:52 2018 +1000
+
+    Created Stock and Store, updated method names in test classes
+
+ 4 files changed, 118 insertions(+), 4 deletions(-)
+
+commit 639861309e5f9331ad350544ccd6319c5049e566
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Mon May 21 21:37:35 2018 +1000
+
+    Worked on implementing reading a manifest from a CSV. Overloaded
+    loadCargo method for OrdinaryTruck.
+
+ 3 files changed, 99 insertions(+), 16 deletions(-)
+
+commit bde9e12055ec319dd065e76a8f6c79c42b3e2d40
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Mon May 21 20:29:36 2018 +1000
+
+    Implemented truck.getTypeToString method.
+
+ 7 files changed, 112 insertions(+), 6 deletions(-)
+
+commit 76dd15439d12224cbaf0364aa677c12698dd0ebc
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Mon May 21 17:56:50 2018 +1000
+
+    Added comments to event listeners in the GUI.
+
+ 1 file changed, 30 insertions(+), 7 deletions(-)
+
+commit fb71110bfa2997172f979b5edea081dde7b2744a
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Mon May 21 15:11:02 2018 +1000
+
+    add tests for store.displayCapital
+
+ 1 file changed, 19 insertions(+), 4 deletions(-)
+
+commit 1272ff4d17f28da6939f7b6fba17c069bb8f498d
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Mon May 21 14:07:38 2018 +1000
+
+    added comments to classes and methods
+
+ 4 files changed, 89 insertions(+), 10 deletions(-)
+
+commit d5358f68bb43bee903883df1ab08b8a16a81b0dd
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Mon May 21 14:07:04 2018 +1000
+
+    added more tests to StoreTests.java for checking the displaying of
+    capital.
+
+ 1 file changed, 8 insertions(+)
+
+commit 9a8b67461139ce9c9a23f2040ad9fcf374181fe6
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Mon May 21 11:49:43 2018 +1000
+
+    Added marking rubric PDF and added listener stub classes for handling
+    button presses in the GUI.
+
+ 2 files changed, 37 insertions(+)
+
+commit 8a4249913b7848d0f3f27cfed2bc61bb9070b56f
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Fri May 18 19:51:41 2018 +1000
+
+    Created GUI skeleton.
+
+ 4 files changed, 77 insertions(+), 2 deletions(-)
+
+commit b2056e403166231a92e82cfc1d0f7fb3ca0310f6
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Thu May 17 15:46:11 2018 +1000
+
+    Refactored ordTruck and fridgeTruck to take advantage of abstract Truck
+
+ 3 files changed, 15 insertions(+), 25 deletions(-)
+
+commit 390cfe429ba0cef52a0b6af2b0228fca080e580e
+Author: Lucas Wickham <lucas.wickham@blackbook.ai>
+Date:   Wed May 16 22:42:03 2018 +1000
+
+    added Item class
+
+ 1 file changed, 86 insertions(+)
+
+commit d6978bfb51b7847235153bee862ee92689423e12
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Wed May 16 21:20:46 2018 +1000
+
+    Implemented methods for the trucks, wrote more tests for stock and item
+
+ 7 files changed, 100 insertions(+), 31 deletions(-)
+
+commit 8b1172b4c75729f55005bc15ed3fb7b97fa17ce6
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Wed May 16 19:01:24 2018 +1000
+
+    added chris's stub classes
+
+ 6 files changed, 98 insertions(+)
+
+commit b2cbf3199c684cf43669897c7ef280a267d551c1
+Author: Lucas Wickham <lucas.wickham@blackbook.ai>
+Date:   Wed May 16 00:28:15 2018 +1000
+
+    Added unit tests for Chris
+
+ 3 files changed, 242 insertions(+), 6 deletions(-)
+
+commit 0ccc8b59a634c7e1cbc97bba3699fc9d8053b928
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Tue May 15 21:27:17 2018 +1000
+
+    added more tests for stock and item, more to do/fix for store I feel
+
+ 3 files changed, 120 insertions(+), 32 deletions(-)
+
+commit b7602cfe989c5b612a13db74206aa4060e2f2890
+Author: Christopher Ayling <chris.ayling.360@gmail.com>
+Date:   Thu May 10 22:21:51 2018 +1000
+
+    started writing unit tests for lucas
+
+ 3 files changed, 93 insertions(+), 8 deletions(-)
+
+commit e59245579be3a007ee80a9436aa997859c42b149
+Author: Christopher Ayling <chris.ayling@blackbook.ai>
+Date:   Wed May 9 11:52:54 2018 +0100
+
+    wrote stub test files
+
+ 9 files changed, 109 insertions(+)
+
+commit d77bbd8dcadcc0eae30ef76e8e07d3d9fe57be8b
+Author: Christopher Ayling <chris.ayling@blackbook.ai>
+Date:   Tue Apr 24 06:38:36 2018 +0100
+
+    added provided docs
+
+ 8 files changed, 151 insertions(+)
+
+commit 6f3c73c74cfe8ee0da6e8998af14988ce867381d
+Author: Chris Ayling <chris.ayling.360@gmail.com>
+Date:   Wed Apr 18 19:04:40 2018 +1000
+
+    Initial commit
+
+ 1 file changed, 2 insertions(+)

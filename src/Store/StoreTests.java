@@ -6,7 +6,12 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 
-
+/**
+ * Test cases for Store.
+ *
+ * @author Christopher Ayling
+ *
+ */
 public class StoreTests {
 
 	private Store store = null, store2 = null;

@@ -17,7 +17,7 @@ import Stock.*;
  * RefrigeratedTruck concrete class of abstract Truck. Can hold items which
  * require temperature control between -20 and 10 degrees celsius.
  * 
- * @author Chris
+ * @author Christopher Ayling
  *
  */
 public class RefrigeratedTruck extends Truck {

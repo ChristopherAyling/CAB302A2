@@ -1,5 +1,12 @@
 package Stock;
 
+/**
+ * 
+ * StockException class.
+ * 
+ * @author Christopher Ayling
+ *
+ */
 @SuppressWarnings("serial")
 public class StockException extends Exception {
 

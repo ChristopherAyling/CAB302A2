@@ -4,6 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * Test cases for Item
+ * 
+ * @author Christopher Ayling
+ *
+ */
 public class ItemTests {
 
 	private String name = "Oscar";
@@ -65,7 +71,7 @@ public class ItemTests {
 		assertEquals(null, item.getTemperature());
 	}
 	
-	@Test 
+	@Test
 	public void equalsTest() {
 		Item item1 = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
 		Item item2 = new Item(name, manufacturingCost, sellPrice, reorderPoint, reorderAmount, temp);
