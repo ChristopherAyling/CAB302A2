@@ -14,6 +14,9 @@ package Delivery;
 import Stock.*;
 
 /**
+ * RefrigeratedTruck concrete class of abstract Truck. Can hold items which
+ * require temperature control between -20 and 10 degrees celsius.
+ * 
  * @author Chris
  *
  */
@@ -25,9 +28,12 @@ public class RefrigeratedTruck extends Truck {
 		cargoMaxCapacity = 800;
 	}
 	
+	
 	/**
+	 * Load an item into the truck. If the item's required temperature
+	 * is not in the safe range a DeliveryException will be thrown.
 	 * 
-	 * @throws DeliveryException 
+	 * @throws DeliveryException If the item requires a temperature outside the safe range.
 	 */
 	@Override
 	public void loadCargo(Item item) throws DeliveryException {
@@ -41,8 +47,11 @@ public class RefrigeratedTruck extends Truck {
 	
 	
 	/**
+	 * Load all items in a stock in the trcuk. If the item's required
+	 * temperature is not in the safe range a DeliveryException will
+	 * be thrown.
 	 * 
-	 * @throws DeliveryException 
+	 * @throws DeliveryException If an item requires a temperature outside the safe range.
 	 */
 	@Override
 	public void loadCargo(Stock stock) throws DeliveryException {
@@ -55,8 +64,10 @@ public class RefrigeratedTruck extends Truck {
 	
 	
 	/**
+	 * Load an item into the truck. If the item's required temperature
+	 * is not in the safe range a DeliveryException will be thrown.
 	 * 
-	 * @throws DeliveryException
+	 * @throws DeliveryException If the item requires a temperature outside the safe range.
 	 */
 	@Override
 	public void loadCargo(Item item, int quantity) throws DeliveryException {
@@ -70,8 +81,11 @@ public class RefrigeratedTruck extends Truck {
 	
 	/**
 	 * Calculate the cost of the truck using the following formula:
-	 * 
-	 * $$ 900 + 200*0.7^{\frac{t}{5}} $$
+	 * <br>
+	 * w + 900 + 200*0.7^(t/5)
+	 * <br>
+	 * Where w is the wholesale cost of all items in the truck and t
+	 * is the temperature the truck maintains.
 	 * 
 	 * @return cost in dollars
 	 */
@@ -81,12 +95,13 @@ public class RefrigeratedTruck extends Truck {
 	}
 	
 	
-	
 	/**
-	 * Returns the temperature in degrees celcius of the coldest item in the Truck. The
-	 * temperature returned is in the set R(-20.0, 10);
+	 * Returns the temperature in degrees celcius that maintains a safe
+	 * temperature for the trucks cargo. Equal to the temperature of
+	 * the item in the cargo with the lowest temperature and in the
+	 * range from -20 to 10 inclusive.
 	 * 
-	 * @return temperature (c)
+	 * @return temperature In degrees celcius.
 	 */
 	@Override
 	public Double getTemperature(){
@@ -96,6 +111,7 @@ public class RefrigeratedTruck extends Truck {
 			return cargo.getColdestItemTemperature();
 		}
 	}
+	
 	
 	@Override
 	public String getTypeToString() {

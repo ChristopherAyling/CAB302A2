@@ -4,6 +4,7 @@
  * 
  */
 package Delivery;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,13 +19,17 @@ import Stock.*;
 import Store.*;
 
 /**
+ * A collection of trucks. Can be constructed manually or automaticall from a
+ * CSV file or an instance of Store.Store. Manifests have the ability
+ * to calculate their cost.
+ * 
  * @author Chris
  *
  */
 public class Manifest {
-	
-	private ArrayList<Truck> trucks = new ArrayList<Truck>(); 
-	
+
+	private ArrayList<Truck> trucks = new ArrayList<Truck>();
+
 	/**
 	 * Constructor. Construct a new Manifest object.
 	 * 
@@ -32,31 +37,30 @@ public class Manifest {
 	public Manifest() {
 
 	}
-	
+
 	
 	/**
-	 * Constructor. Construct a new Manfest object which contains trucks
-	 * that together contain the reorder amount of any items below their
-	 * reorder point.
+	 * Constructor. Construct a new Manfest object which contains trucks that
+	 * together contain the reorder amount of any items below their reorder point.
 	 * 
-	 * @param Store to create shipment for
+	 * @param Store
+	 *            to create shipment for
 	 * @throws StockException
-	 * @throws DeliveryException 
+	 * @throws DeliveryException
 	 */
 	public Manifest(Store store) throws DeliveryException {
 		Stock current = store.getInventory();
 		Stock inNeedOf = new Stock();
 		Stock properties = store.getItemProperties();
-		
+
 		// calculate needs
 		for (Item item : properties.getItems()) { // for every possible item
-			if (current.count(item) <= item.getReorderPoint()) { // if the amount of items in the inventory is less than the reorder point
+			if (current.count(item) <= item.getReorderPoint()) { // if the amount of items in the inventory is less than
+																	// the reorder point
 				inNeedOf.add(item, item.getReorderAmount()); // add to inNeedOf
 			}
 		}
-		
-		// TODO create cost optimizing optimal manifest
-		
+
 		// Sort items into fridge and ordinary
 		Stock fridgeItems = new Stock();
 		Stock ordItems = new Stock();
@@ -67,10 +71,10 @@ public class Manifest {
 				fridgeItems.add(item);
 			}
 		}
-				
+
 		Item coldestItem = null;
 		RefrigeratedTruck currentColdTruck = new RefrigeratedTruck();
-		
+
 		while (fridgeItems.size() > 0) { // fill trucks coldest item first
 			coldestItem = fridgeItems.getColdestItem();
 			while (fridgeItems.count(coldestItem) > 0) {
@@ -81,10 +85,10 @@ public class Manifest {
 					trucks.add(currentColdTruck); // add to manifest
 					currentColdTruck = new RefrigeratedTruck(); // make a new one
 				}
-			}//end while
+			} // end while
 		} // end while
 		trucks.add(currentColdTruck);
-		
+
 		OrdinaryTruck currentOrdinaryTruck = new OrdinaryTruck();
 		while (ordItems.size() > 0) { // for every left over ordinary item
 			try { // try adding it to current truck
@@ -95,103 +99,124 @@ public class Manifest {
 				trucks.add(currentOrdinaryTruck);
 				currentOrdinaryTruck = new OrdinaryTruck();
 			}
-		}//end while
+		} // end while
 		trucks.add(currentOrdinaryTruck);
 	}
-	
+
 	
 	/**
-	 * Constructor. Construct a new Manifest object from the
-	 * data contained in the file specified.
+	 * Constructor. Construct a new Manifest object from the data contained in the
+	 * file specified.
 	 * 
-	 * the CSV must be in the following form:
-	 * >[truck type]
-     * [item],[quantity]
-     * [item],[quantity]
-     * >[truck type]
-     * [item],[quantity]
+	 * the CSV must be in the following form: >[truck type] [item],[quantity]
+	 * [item],[quantity] >[truck type] [item],[quantity]
 	 * 
-	 * @param path path to a file containing manifest data.
-	 * @throws StockException 
-	 * @throws DeliveryException 
+	 * @param path
+	 * 				path to a file containing manifest data.
+	 * @throws StockException
+	 * @throws DeliveryException
 	 *
 	 */
 	public Manifest(String path) throws IOException, CSVFormatException, StockException, DeliveryException {
 		Store store = Store.getInstance();
 		Truck truck = null;
 		Item item;
-		
+
 		FileReader reader = new FileReader(path);
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		String line;
-		
+
 		while ((line = bufferedReader.readLine()) != null) {
 			switch (line) { // make a truck
 			case ">Ordinary":
-				if (truck != null) trucks.add(truck);
+				if (truck != null)
+					trucks.add(truck);
 				truck = new OrdinaryTruck();
 				break;
 			case ">Refrigerated":
-				if (truck != null) trucks.add(truck);
+				if (truck != null)
+					trucks.add(truck);
 				truck = new RefrigeratedTruck();
 				break;
 			default: // else add an item to a truck
-				if (truck == null) throw new CSVFormatException(); // why is there not a truck specified??
-				
+				if (truck == null)
+					throw new CSVFormatException(); // why is there not a truck specified??
+
 				// parse the String
 				String[] values = line.split(",");
 				int quantity = Integer.parseInt(values[1]);
 				String name = values[0];
 				item = store.getItemProperties(name);
-				
+
 				// add to current truck's cargo
-				for (int i=0; i!=quantity; i++) {
+				for (int i = 0; i != quantity; i++) {
 					truck.loadCargo(item);
 				}
 				break;
 			}// end switch
-		}//end while
+		} // end while
 		bufferedReader.close();
 	}
-		
+
+	
 	/**
 	 * Add a truck to the manifest.
+	 * 
 	 * @param truck
 	 */
 	public void add(Truck truck) {
 		trucks.add(truck);
 	}
-	
+
 	
 	/**
 	 * Sums the cost of all trucks in the manifest.
+	 * 
 	 * @return cost of manifest in dollars
 	 */
 	public double getCost() {
 		double cost = 0.0;
 		for (Truck truck : trucks) {
-			if (truck.countItemsInCargo() == 0) continue; // don't add trucks with no items in to the manifest
+			if (truck.countItemsInCargo() == 0)
+				continue; // don't add trucks with no items in to the manifest
 			cost += truck.getCost();
 		}
 		return cost;
 	}
+
 	
+	/**
+	 * Return a formatted string representing the cost of the truck.
+	 * e.g. "$10.00" as opposed to "10.003829298"
+	 * 
+	 * @return formatted currency string
+	 */
 	public String displayCost() {
 		return NumberFormat.getCurrencyInstance().format(getCost());
 	}
+
 	
-	public ArrayList<Truck> getTrucks(){
+	/**
+	 * Return all the trucks in the manifest.
+	 * 
+	 * @return trucks 
+	 * 				an ArrayList of all trucks in the manifest.
+	 */
+	public ArrayList<Truck> getTrucks() {
 		return trucks;
 	}
+
 	
 	/**
 	 * Return a string representation of the manifest in the following form:
-	 *
-	 * >[truck type]
-     * [item],[quantity]
-     * [item],[quantity]
-     * >[truck type]
-     * [item],[quantity]
+	 * <br>
+	 * >[truck type]<br>
+	 * [item],[quantity]<br>
+	 * [item],[quantity]<br>
+	 * >[truck type]<br>
+	 * [item],[quantity]
+	 * 
+	 * @return String
 	 *
 	 */
 	public String toString() {
@@ -201,7 +226,8 @@ public class Manifest {
 		itemCounts.put("name", 7);
 		boolean firstTruck = true;
 		for (Truck truck : trucks) {
-			if (truck.countItemsInCargo() == 0) continue; // don't add trucks with no items in to the manifest
+			if (truck.countItemsInCargo() == 0)
+				continue; // don't add trucks with no items in to the manifest
 			if (firstTruck) {
 				manifestSB.append(truck.toString());
 				firstTruck = false;
@@ -209,28 +235,35 @@ public class Manifest {
 				manifestSB.append(nl);
 				manifestSB.append(truck.toString());
 			}
-		}//end for
+		} // end for
 		return manifestSB.toString();
 	}
-	
 
+	
 	/**
 	 * Write the manifest to a CSV file using the following format:
+	 * <br>
+	 * >[truck type]<br>
+	 * [item],[quantity]<br>
+	 * [item],[quantity]<br>
+	 * >[truck type]<br>
+	 * [item],[quantity]
 	 * 
-	 * >[truck type]
-     * [item],[quantity]
-     * [item],[quantity]
-     * >[truck type]
-     * [item],[quantity]
-	 * 
-	 * @param path the path to save the file at.
+	 * @param path
+	 *            The path to save the file at.
 	 */
 	public void writeToCSV(String path) throws IOException {
 		FileWriter writer = new FileWriter(path);
 		writer.write(this.toString());
 		writer.close();
 	}
+
 	
+	/**
+	 * Return the amount of trucks in the manifest.
+	 * 
+	 * @return size
+	 */
 	public int size() {
 		return trucks.size();
 	}

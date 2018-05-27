@@ -37,7 +37,6 @@ public class UserInterface {
 	}
 	
 	
-	
 	/**
 	 * Create the show the graphical user interface.
 	 */
