@@ -1,8 +1,8 @@
-	/**
- * 
- */
 package Stock;
 
+/**
+* @author Lucas Wickham
+*/
 public class Item {
 
 	private String name;

@@ -1,12 +1,12 @@
-/**
- * 
- */
 package Stock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Lucas Wickham
+ */
 public class Stock {
 
 	private ArrayList<Item> items = new ArrayList<Item>();

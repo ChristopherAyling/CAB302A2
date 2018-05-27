@@ -23,7 +23,8 @@ import javax.swing.table.DefaultTableModel;
  * 
  * User Interface for a supermarket inventory system
  * 
- * @author Christopher Ayling and Lucas Wickham
+ * @author Christopher Ayling
+ * @author Lucas Wickham
  *
  */
 public class UserInterface {
@@ -110,6 +111,22 @@ public class UserInterface {
 			        loadManifestButton.setEnabled(true);
 			        loadSalesLogButton.setEnabled(true);
 			        loadItemPropertiesButton.setEnabled(false);
+			        
+			        // create and add table to centre
+			        String[] columnNames = {"Name", "Quantity", "Manufactuing Cost", "Sell Price", "Reorder Point", "Reorder Amount", "Temperature"};
+			        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+			        for(Item item : store.getItemProperties().getItems()) {
+			        	tableModel.addRow(new Object[]{item.getName(), 0, item.getManufacturingCost(), item.getSellPrice(), item.getReorderPoint(), item.getReorderAmount(), item.getTemperature()});
+			        }
+			        JTable table = new JTable(tableModel); // initialize table with columns and empty rows
+			        JScrollPane pane = new JScrollPane(table);
+			        mainPanel.add(pane, BorderLayout.CENTER);
+			        
+			        //add panel to gui
+			        frame.getContentPane().add(mainPanel);
+			        frame.pack();
+			        frame.setVisible(true);
+			        
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -219,12 +236,6 @@ public class UserInterface {
         loadManifestButton.setEnabled(false);
         loadSalesLogButton.setEnabled(false);
         mainPanel.add(topPanel, BorderLayout.NORTH);
-        
-        // create and add table to centre
-        String[] columnNames = {"Name", "Quantity", "Manufactuing Cost", "Sell Price", "Reorder Point", "Reorder Amount", "Temperature"};
-        JTable table = new JTable(new DefaultTableModel(columnNames, 3)); // initialize table with columns and empty rows
-        JScrollPane pane = new JScrollPane(table);
-        mainPanel.add(pane, BorderLayout.CENTER);
         
         //add panel to gui
         frame.getContentPane().add(mainPanel);

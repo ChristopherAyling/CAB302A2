@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Store;
 
 import java.text.NumberFormat;
@@ -9,6 +6,9 @@ import Stock.Item;
 import Stock.Stock;
 import Stock.StockException;
 
+/**
+ * @author Lucas Wickham
+ */
 public class Store {
 
 	private static Store instance;
