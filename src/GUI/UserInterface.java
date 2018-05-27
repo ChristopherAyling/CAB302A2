@@ -114,8 +114,8 @@ public class UserInterface {
 			        
 			        // create and add table to centre
 			        String[] columnNames = {"Name", "Quantity", "Manufactuing Cost", "Sell Price", "Reorder Point", "Reorder Amount", "Temperature"};
-			        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0){
-
+			        @SuppressWarnings("serial")
+					DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0){
 			            @Override
 			            public boolean isCellEditable(int row, int column) {
 			               //all cells false
