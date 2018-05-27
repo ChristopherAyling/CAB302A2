@@ -23,6 +23,64 @@ public class OrdinaryTruckTests {
 		assertEquals(truck.cargoMaxCapacity, 1000);
 	}
 	
+	@Test(expected = DeliveryException.class)
+	public void testLoadTooMuchCargo() throws DeliveryException {
+		truck = new OrdinaryTruck();
+		
+		Item item = new Item("there's too many of me!", 1, 1, 1, 1);
+		
+		for(int i=-1000; i<truck.cargoMaxCapacity; i++) {
+			truck.loadCargo(item);	
+		}
+	}
+	
+	@Test(expected = DeliveryException.class)
+	public void testLoadNTooMuchCargo() throws DeliveryException {
+		truck = new OrdinaryTruck();
+		
+		Item item = new Item("there's too many of me!", 1, 1, 1, 1);
+		
+		for(int i=-1000; i<truck.cargoMaxCapacity; i++) {
+			truck.loadCargo(item, 1);	
+		}
+	}
+	
+	@Test(expected = DeliveryException.class)
+	public void testLoadNManyTooMuchCargo() throws DeliveryException {
+		truck = new OrdinaryTruck();
+		
+		Item item = new Item("there's too many of me!", 1, 1, 1, 1);
+		
+		truck.loadCargo(item, truck.cargoMaxCapacity+1);	
+	}
+	
+	@Test(expected = DeliveryException.class)
+	public void testLoadStockTooMuchCargo() throws DeliveryException {
+		truck = new OrdinaryTruck();
+		
+		Item item = new Item("there's too many of me!", 1, 1, 1, 1);
+		Stock stock = new Stock();
+		
+		for(int i=-1000; i<truck.cargoMaxCapacity; i++) {
+			stock.add(item);
+		}
+		
+		truck.loadCargo(stock);
+	}
+	
+	@Test(expected = DeliveryException.class)
+	public void testLoadMultipleStocksTooMuchCargo() throws DeliveryException {
+		truck = new OrdinaryTruck();
+		
+		Item item = new Item("there's too many of me!", 1, 1, 1, 1);
+		Stock stock = new Stock();
+		stock.add(item);
+		
+		for(int i=0; i<truck.cargoMaxCapacity+1; i++) {
+			truck.loadCargo(stock);
+		}		
+	}
+	
 	@Test
 	public void testLoadCargo() throws DeliveryException {
 		// load that fits

@@ -63,13 +63,33 @@ public class StockTests {
 	
 	@Test
 	public void removeNTestMany() {
+		assertEquals(0, stock.count(tempItem1));
 		stock.add(tempItem1);
 		stock.add(tempItem1);
 		stock.add(tempItem1);
 		stock.add(tempItem1);
 		stock.remove(tempItem1, 2);
 		assertEquals(2, stock.count(tempItem1));
-	}	
+		stock.remove(tempItem1, 2);
+		assertEquals(0, stock.count(tempItem1));
+		stock.remove(tempItem1, 2);
+		assertEquals(0, stock.count(tempItem1));
+	}
+	
+	@Test
+	public void removeNTestMultipleItems() {
+		stock.add(tempItem1);
+		stock.add(tempItem2);
+		stock.remove(tempItem1, 1);
+		assertEquals(0, stock.count(tempItem1));
+	}
+	
+	@Test public void removeNtestMultipleItemsMany() {
+		stock.add(tempItem1, 5);
+		stock.add(tempItem2, 5);
+		stock.remove(tempItem1, 1);
+		assertEquals(4, stock.count(tempItem1));
+	}
 	
 	@Test
 	public void iterTest() {

@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import GUI.CSVFormatException;
@@ -51,14 +50,13 @@ public class Manifest {
 		// calculate needs
 		for (Item item : properties.getItems()) { // for every possible item
 			if (current.count(item) <= item.getReorderPoint()) { // if the amount of items in the inventory is less than the reorder point
-//				System.out.println(item.getName() + " count: " + current.count(item) + " roa: " + item.getReorderAmount());
 				inNeedOf.add(item, item.getReorderAmount()); // add to inNeedOf
 			}
 		}
 		
-		// TODO optimize shipment
+		// TODO create cost optimizing optimal manifest
 		
-		// Sort items into fridge and ord
+		// Sort items into fridge and ordinary
 		Stock fridgeItems = new Stock();
 		Stock ordItems = new Stock();
 		for (Item item : inNeedOf.getItems()) {
@@ -68,49 +66,51 @@ public class Manifest {
 				fridgeItems.add(item);
 			}
 		}
-		
-		// Sort fridge items from coldest to warmest
-		Stock sortedFridgeItems = new Stock();
+				
 		Item coldestItem = null;
-		while (fridgeItems.size() > 0) {
+		RefrigeratedTruck currentColdTruck = new RefrigeratedTruck();
+		
+		while (fridgeItems.size() > 0) { // fill trucks coldest item first
 			coldestItem = fridgeItems.getColdestItem();
-			sortedFridgeItems.add(coldestItem);
-			fridgeItems.remove(coldestItem, 1);
-		}
+			while (fridgeItems.count(coldestItem) > 0) {
+				try { // adding to current cold truck
+					currentColdTruck.loadCargo(coldestItem);
+					fridgeItems.remove(coldestItem, 1);
+				} catch (DeliveryException e) { // if full
+					trucks.add(currentColdTruck); // add to manifest
+					currentColdTruck = new RefrigeratedTruck(); // make a new one
+				}
+			}//end while
+		} // end while
+		trucks.add(currentColdTruck);
 		
-		//DEBUG
-		System.out.println(sortedFridgeItems.toString());
-		System.out.println("--Sorted fridge items ^^");
-		
-		
-		// Concat lists
-		List<Item> all = new ArrayList<>(sortedFridgeItems.getItems());
-		all.addAll(ordItems.getItems());
-		Stock toRefill = new Stock();
-		for (Item item : all) {
-			toRefill.add(item);
-		}
-		
-		//DEBUG
-		System.out.println(inNeedOf.toString());
-		System.out.println("--In need of ^^");
-		System.out.println(toRefill.toString());
-		System.out.println("--to Refill ^^");
-		
-		
-		Truck fridge = new RefrigeratedTruck();
-		Truck ord = new OrdinaryTruck();
-		for (Item item : inNeedOf.getItems()) {
-			if (item.getTemperature() != null) {
-				fridge.loadCargo(item);
-			} else {
-				ord.loadCargo(item);
+		OrdinaryTruck currentOrdinaryTruck = new OrdinaryTruck();
+		while (ordItems.size() > 0) { // for every left over ordinary item
+			try { // try adding it to current truck
+				Item itemToAdd = ordItems.getItems().get(0);
+				currentOrdinaryTruck.loadCargo(itemToAdd);
+				ordItems.remove(itemToAdd, 1);
+			} catch (DeliveryException e) { // if it is full, add it to manifest and make a new one.
+				trucks.add(currentOrdinaryTruck);
+				currentOrdinaryTruck = new OrdinaryTruck();
 			}
-		}
-		
-		trucks.add(ord);
-		trucks.add(fridge);
+		}//end while
+		trucks.add(currentOrdinaryTruck);
+
+//		Truck fridge = new RefrigeratedTruck();
+//		Truck ord = new OrdinaryTruck();
+//		for (Item item : inNeedOf.getItems()) {
+//			if (item.getTemperature() != null) {
+//				fridge.loadCargo(item);
+//			} else {
+//				ord.loadCargo(item);
+//			}
+//		}
+//		
+//		trucks.add(ord);
+//		trucks.add(fridge);
 	}
+	
 	
 	/**
 	 * Constructor. Construct a new Manifest object from the
@@ -182,6 +182,7 @@ public class Manifest {
 	public double getCost() {
 		double cost = 0.0;
 		for (Truck truck : trucks) {
+			if (truck.countItemsInCargo() == 0) continue; // don't add trucks with no items in to the manifest
 			cost += truck.getCost();
 		}
 		return cost;
@@ -208,6 +209,7 @@ public class Manifest {
 		itemCounts.put("name", 7);
 		boolean firstTruck = true;
 		for (Truck truck : trucks) {
+			if (truck.countItemsInCargo() == 0) continue; // don't add trucks with no items in to the manifest
 			if (firstTruck) {
 				manifestSB.append(truck.toString());
 				firstTruck = false;

@@ -20,7 +20,7 @@ public abstract class Truck {
 	 * @throws DeliveryException if truck will exceed capacity.
 	 */
 	public void loadCargo(Item item) throws DeliveryException {
-		if (getCargoCurrentCapacity() <= cargoMaxCapacity) {
+		if (cargo.size() < cargoMaxCapacity) {
 			cargo.add(item);
 		} else {
 			throw new DeliveryException("Truck will exceed max capacity");
@@ -36,7 +36,9 @@ public abstract class Truck {
 	 * @throws DeliveryException if truck will exceed capacity.
 	 */
 	public void loadCargo(Item item, int quantity) throws DeliveryException {
-		if (quantity + countItemsInCargo() > cargoMaxCapacity) {
+		if (quantity < 0) {
+			return;
+		}else if (quantity + countItemsInCargo() > cargoMaxCapacity) {
 			throw new DeliveryException("Truck will exceed max capacity");
 		}
 		for (int i=0; i < quantity; i++) {

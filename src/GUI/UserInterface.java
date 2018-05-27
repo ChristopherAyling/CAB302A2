@@ -135,6 +135,7 @@ public class UserInterface {
 				String path = fd.getFile();
 				try {
 					Manifest manifest = new Manifest(store);
+					System.out.println(manifest.toString());
 					manifest.writeToCSV(path);
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(frame, "Error writing manifest to CSV", "Error", JOptionPane.ERROR_MESSAGE);

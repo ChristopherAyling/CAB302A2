@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Stock.Item;
+import Store.Store;
 
 import java.util.*;
 
@@ -52,10 +53,23 @@ public class ManifestTests {
 		
 		// compare prices
 	}
+
+	@Test
+	public void constructFromStoreTestOrdinaryOnly() throws DeliveryException {
+		Store store = Store.getInstance();
+		Item item1 = new Item("i1", 1, 1, 1, 10);
+		store.setItemProperties(item1);
+		Manifest man1 = new Manifest(store);
+		System.out.println("manifest created from store:\n"+man1.toString());
+		
+		assertTrue("manifest.toString() should contain text", man1.toString().length()>0);
+		assertEquals("first character should be: > ", (">"), Character.toString(man1.toString().charAt(0)));
+	}
 	
 	@Test
 	public void testToString() throws DeliveryException {
 		Manifest man = new Manifest();
+		assertEquals("", man.toString());
 		Truck ord = new OrdinaryTruck();
 		Truck fridge = new RefrigeratedTruck();
 		
@@ -67,7 +81,7 @@ public class ManifestTests {
 		
 		man.add(ord);
 		man.add(fridge);
-		System.out.println(man.toString());
+		System.out.println("manifest created manually:\n"+man.toString());
 	}
 
 }
