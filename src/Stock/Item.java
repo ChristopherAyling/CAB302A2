@@ -83,17 +83,6 @@ public class Item {
 			return true;
 		}
 		else return false;
-		/*
-		if(this.getName() == otherItem.getName() && 
-				this.getManufacturingCost() == otherItem.getManufacturingCost() && 
-				this.getSellPrice() == otherItem.getSellPrice() && 
-				this.getReorderPoint() == otherItem.getReorderPoint() &&
-				this.getReorderAmount() == otherItem.getReorderAmount() && 
-				this.getTemperature() == otherItem.getTemperature()) {
-			return true;
-		}
-		return false;
-		*/
 	}
 
 }

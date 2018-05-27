@@ -34,9 +34,13 @@ public class Stock {
 	
 	public void remove(Item itemToRemove, int number) {
 		int removed = 0;
-		while (removed < number) {
-			items.remove(itemToRemove);
-			removed++;
+		for(Item item : items) {
+			if(removed < number) {
+				if(item.equals(itemToRemove)) {
+					items.remove(item);
+					removed++;
+				}
+			}
 		}
 	}
 	

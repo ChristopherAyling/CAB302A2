@@ -223,14 +223,54 @@ public class UserInterface {
         
         loadSalesLogButton.addActionListener(new ActionListener() {
         	/**
-        	 * Load in a sales log; increases capital and inventory.
+        	 * Load in a sales log; increases capital and decreases inventory.
         	 * 
         	 * @author Lucas Wickham
         	 * 
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Load Sales
+				// present user with file selection dialog
+				FileDialog fd = new FileDialog(frame, "Load Sales Log", FileDialog.LOAD);
+				fd.setVisible(true);
+				String path = fd.getFile();
+				if (path == null) return;
+				
+				try {
+					Stock stock = store.getInventory();
+
+					FileReader reader = new FileReader(path);
+					BufferedReader bufferedReader = new BufferedReader(reader);
+					String line;
+					
+					while ((line = bufferedReader.readLine()) != null) {
+						
+						// parse the String
+						String[] values = line.split(",");
+						Integer quantity = Integer.parseInt(values[1]);
+						String name = values[0];
+						
+						Item item = store.getItemProperties(name);
+						
+						store.getInventory().remove(item, quantity);
+					} // end while
+					bufferedReader.close();
+					
+					// Update Capital
+					store.addCapital(stock.getWholesaleCost());
+					capitalLabel.setText("Capital: " + store.displayCapital());
+					// Update item quantities
+					for(Item item : stock.getItems()) {
+						store.getInventory().remove(item);
+					}
+					
+					frame.repaint();
+					JOptionPane.showMessageDialog(frame, "Sales Log Successfully Loaded.\nTotal Profit: " + stock.getWholesaleCost());
+				} catch (IOException e3) {
+					JOptionPane.showMessageDialog(frame, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (StockException e3) {
+					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
         
