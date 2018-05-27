@@ -78,7 +78,6 @@ public class UserInterface {
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Item properties button clicked");
 				FileDialog fd = new FileDialog(frame, "Load item properties", FileDialog.LOAD);
 				fd.setVisible(true);
 				
@@ -157,7 +156,6 @@ public class UserInterface {
         	 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Load manifest button clicked");
 				// present user with file selection dialog
 				FileDialog fd = new FileDialog(frame, "Load Manifest", FileDialog.LOAD);
 				fd.setVisible(true);
@@ -165,18 +163,22 @@ public class UserInterface {
 				
 				try {
 					Manifest manifest = new Manifest(path);
-					// update capital shown in GUI
-					System.out.println(manifest.getCost());
+					// Update Capital
 					store.addCapital(-manifest.getCost());
 					capitalLabel.setText("Capital: " + store.displayCapital());
-					// TODO update item quantities in GUI
+					// Update item quantities
+					for(Truck truck : manifest.getTrucks()) {
+						for(Item item : truck.getCargo().getItems()) {
+							store.getInventory().add(item);
+						}
+					}
 					
 					frame.repaint();
 					JOptionPane.showMessageDialog(frame, "Manifest Successfully Loaded.\nTotal Price: " + manifest.displayCost());
 				} catch (IOException e3) {
 					JOptionPane.showMessageDialog(frame, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (CSVFormatException e3) {
-					JOptionPane.showMessageDialog(frame, "CSV in wrong format", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Manifest is in wrong format. Expected format:\n>[TruckType]\n[ItemName],[Quantity]\n...", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (StockException e3) {
 					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (DeliveryException e1) {
@@ -196,7 +198,6 @@ public class UserInterface {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Load Sales
-				System.out.println("Load Sales Log button clicked");
 			}
 		});
         

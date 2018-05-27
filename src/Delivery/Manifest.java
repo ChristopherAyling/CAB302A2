@@ -73,48 +73,47 @@ public class Manifest {
 		}
 
 		Item coldestItem = null;
-		RefrigeratedTruck currentColdTruck = new RefrigeratedTruck();
+		Truck currentTruck = new RefrigeratedTruck();
 
 		while (fridgeItems.size() > 0) { // fill trucks coldest item first
 			coldestItem = fridgeItems.getColdestItem();
 			while (fridgeItems.count(coldestItem) > 0) {
 				try { // adding to current cold truck
-					currentColdTruck.loadCargo(coldestItem);
+					currentTruck.loadCargo(coldestItem);
 					fridgeItems.remove(coldestItem, 1);
 				} catch (DeliveryException e) { // if full
-					trucks.add(currentColdTruck); // add to manifest
-					currentColdTruck = new RefrigeratedTruck(); // make a new one
+					trucks.add(currentTruck); // add to manifest
+					currentTruck = new RefrigeratedTruck(); // make a new one
 				}
 			} // end while
 		} // end while
-		
-		if (currentColdTruck.getCargo().size() != 0) {
-			while (ordItems.size() > 0) {
-				try {
-					Item itemToAdd = ordItems.getItems().get(0);
-					currentColdTruck.loadCargo(itemToAdd);
-					ordItems.remove(itemToAdd, 1);
-				} catch(DeliveryException e) {
-					trucks.add(currentColdTruck);
-					break;
-				}
-			}
-			trucks.add(currentColdTruck);
-		}
+
+//		if (currentColdTruck.getCargo().size() != 0) {
+//			while (ordItems.size() > 0) {
+//				try {
+//					Item itemToAdd = ordItems.getItems().get(0);
+//					currentColdTruck.loadCargo(itemToAdd);
+//					ordItems.remove(itemToAdd, 1);
+//				} catch(DeliveryException e) {
+//					trucks.add(currentColdTruck);
+//					break;
+//				}
+//			}
+//			trucks.add(currentColdTruck);
+//		}
 		
 
-		OrdinaryTruck currentOrdinaryTruck = new OrdinaryTruck();
 		while (ordItems.size() > 0) { // for every left over ordinary item
 			try { // try adding it to current truck
 				Item itemToAdd = ordItems.getItems().get(0);
-				currentOrdinaryTruck.loadCargo(itemToAdd);
+				currentTruck.loadCargo(itemToAdd);
 				ordItems.remove(itemToAdd, 1);
 			} catch (DeliveryException e) { // if it is full, add it to manifest and make a new one.
-				trucks.add(currentOrdinaryTruck);
-				currentOrdinaryTruck = new OrdinaryTruck();
+				trucks.add(currentTruck);
+				currentTruck = new OrdinaryTruck();
 			}
 		} // end while
-		trucks.add(currentOrdinaryTruck);
+		trucks.add(currentTruck);
 	}
 
 	

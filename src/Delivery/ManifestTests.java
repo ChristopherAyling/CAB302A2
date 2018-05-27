@@ -64,6 +64,13 @@ public class ManifestTests {
 		
 		assertTrue("manifest.toString() should contain text", man1.toString().length()>0);
 		assertEquals("first character should be: > ", (">"), Character.toString(man1.toString().charAt(0)));
+		for (Truck truck : man1.getTrucks()) {
+			for (Item item : truck.getCargo().getItems()) {
+				store.getInventory().add(item);
+			}
+		}
+		Manifest man2 = new Manifest(store);
+		assertEquals(0, man2.getCost(), 0.001);
 	}
 	
 	@Test
@@ -82,6 +89,7 @@ public class ManifestTests {
 		man.add(ord);
 		man.add(fridge);
 		System.out.println("manifest created manually:\n"+man.toString());
+		assertEquals(ord.getCost() + fridge.getCost(), man.getCost(), 0.001);
 	}
 
 }
