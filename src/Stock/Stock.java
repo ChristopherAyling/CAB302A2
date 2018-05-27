@@ -33,20 +33,35 @@ public class Stock {
 	}
 	
 	public void remove(Item itemToRemove, int number) {
-		for(int i = 0; i < number; i++) {
-			for(Item item : items) {
-				if(itemToRemove.equals(item)) {
-					items.remove(item);
-				}
-			}
+		int initial = count(itemToRemove);
+		int target;
+		if ((initial - number) <= 0 ) {
+			target = 0;
+		} else target = number;
+		
+		while (count(itemToRemove) > target) {
+			items.remove(itemToRemove);
 		}
+		return;
+		
+//		for(int i = 0; i < number; i++) {
+//			for(Item item : items) {
+//				if(itemToRemove.equals(item)) {
+//					items.remove(item);
+//				}
+//			}
+//		}
 	}
 	
 	public void remove(Item itemToRemove) {
-		for(Item item : items) {
-			if(itemToRemove.equals(item)) {
-				items.remove(item);
-			}
+//		for(Item item : items) {
+//			if(itemToRemove.equals(item)) {
+//				items.remove(item);
+//			}
+//		}
+//		
+		while (items.contains(itemToRemove)) {
+			items.remove(itemToRemove);
 		}
 	}
 	
@@ -58,6 +73,23 @@ public class Stock {
 			}
 		}
 		return itemCount;
+	}
+	
+	public Item getColdestItem() {
+		Item coldestItem = null;
+		Double coldestTemperature = Double.MAX_VALUE;
+		for(Item item : items) {
+			if (item.getTemperature() == null) {
+				continue;
+			} else if(item.getTemperature() < coldestTemperature) {
+				coldestTemperature = item.getTemperature();
+				coldestItem = item;
+			}
+		}
+		if (coldestTemperature == Double.MAX_VALUE) {
+			coldestItem = null;
+		}
+		return coldestItem;
 	}
 	
 	public Double getColdestItemTemperature() {

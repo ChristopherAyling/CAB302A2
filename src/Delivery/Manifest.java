@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import GUI.CSVFormatException;
@@ -50,13 +51,52 @@ public class Manifest {
 		// calculate needs
 		for (Item item : properties.getItems()) { // for every possible item
 			if (current.count(item) <= item.getReorderPoint()) { // if the amount of items in the inventory is less than the reorder point
-				System.out.println(item.getName() + "count: " + current.count(item) + " roa: " + item.getReorderAmount());
+//				System.out.println(item.getName() + " count: " + current.count(item) + " roa: " + item.getReorderAmount());
 				inNeedOf.add(item, item.getReorderAmount()); // add to inNeedOf
 			}
 		}
-		System.out.println(inNeedOf.toString());
 		
 		// TODO optimize shipment
+		
+		// Sort items into fridge and ord
+		Stock fridgeItems = new Stock();
+		Stock ordItems = new Stock();
+		for (Item item : inNeedOf.getItems()) {
+			if (item.getTemperature() == null) {
+				ordItems.add(item);
+			} else {
+				fridgeItems.add(item);
+			}
+		}
+		
+		// Sort fridge items from coldest to warmest
+		Stock sortedFridgeItems = new Stock();
+		Item coldestItem = null;
+		while (fridgeItems.size() > 0) {
+			coldestItem = fridgeItems.getColdestItem();
+			sortedFridgeItems.add(coldestItem);
+			fridgeItems.remove(coldestItem, 1);
+		}
+		
+		//DEBUG
+		System.out.println(sortedFridgeItems.toString());
+		System.out.println("-----");
+		
+		
+		// Concat lists
+		List<Item> all = new ArrayList<>(sortedFridgeItems.getItems());
+		all.addAll(ordItems.getItems());
+		Stock toRefill = new Stock();
+		for (Item item : all) {
+			toRefill.add(item);
+		}
+		
+		//DEBUG
+		System.out.println(inNeedOf.toString());
+		System.out.println("------");
+		System.out.println(toRefill.toString());
+		
+		
 		Truck fridge = new RefrigeratedTruck();
 		Truck ord = new OrdinaryTruck();
 		for (Item item : inNeedOf.getItems()) {
@@ -69,8 +109,6 @@ public class Manifest {
 		
 		trucks.add(ord);
 		trucks.add(fridge);
-		
-		System.out.println(toString());
 	}
 	
 	/**

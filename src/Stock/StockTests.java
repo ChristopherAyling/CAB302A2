@@ -55,10 +55,20 @@ public class StockTests {
 	}
 	
 	@Test
-	public void removeNTest() {
+	public void removeNTestOne() {
 		stock.add(tempItem1);
 		stock.remove(tempItem1, 1);
 		assertEquals(0, stock.count(tempItem1));
+	}
+	
+	@Test
+	public void removeNTestMany() {
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		stock.remove(tempItem1, 2);
+		assertEquals(2, stock.count(tempItem1));
 	}
 	
 	@Test(expected = StockException.class)
