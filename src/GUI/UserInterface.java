@@ -127,9 +127,6 @@ public class UserInterface {
 				//create manifest to order the the reorder quantity of each item which minimizes cost
 				//save as a CSV to a location of the user's choice
 				
-				// TODO Create an optimised manifest object from current inventory.
-					// TODO get
-				
 				FileDialog fd = new FileDialog(frame, "Export Manifest", FileDialog.SAVE);
 				fd.setVisible(true);
 				String path = fd.getFile();
@@ -177,6 +174,7 @@ public class UserInterface {
 					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (DeliveryException e1) {
 					System.out.println(e1.getMessage());
+					e1.printStackTrace();
 					JOptionPane.showMessageDialog(frame, "A delivery error occured.", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				System.out.println("manifest should've been loaded!");

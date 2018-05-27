@@ -64,6 +64,9 @@ public class Store {
 	}
 	
 	private Item copyItem(Item item) {
+		if (item.getTemperature() == null) {
+			return new Item(item.getName(), item.getManufacturingCost(), item.getSellPrice(), item.getReorderPoint(), item.getReorderAmount());
+		}
 		return new Item(item.getName(), item.getManufacturingCost(), item.getSellPrice(), item.getReorderPoint(), item.getReorderAmount(), item.getTemperature());
 	}
 	

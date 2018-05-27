@@ -28,7 +28,10 @@ public class OrdinaryTruck extends Truck {
 	@Override
 	public void loadCargo(Item item) throws DeliveryException {
 		if (item.getTemperature() != null) {
-			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead");
+			throw new DeliveryException("Items which require temperature control may not be loaded into an instance of OrdinayTruck, try using RefrigeratedTruck instead\n" +
+										"Item temperature: " + item.getTemperature() +
+										"\nItem name: " + item.getName()
+										);
 		}
 		super.loadCargo(item);
 	}
@@ -73,7 +76,7 @@ public class OrdinaryTruck extends Truck {
 	 */
 	@Override
 	public double getCost() {
-		return 750.0 + (0.25*this.countItemsInCargo());
+		return cargo.getWholesaleCost() + 750.0 + (0.25*this.countItemsInCargo());
 	}
 	
 	@Override

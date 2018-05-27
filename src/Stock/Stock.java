@@ -102,6 +102,17 @@ public class Stock {
 		return coldestTemperature;
 	}
 	
+	/**
+	 * @return the sum of the manufacturing costs of all items in the stock.
+	 */
+	public double getWholesaleCost() {
+		double cost = 0;
+		for (Item item : items) {
+			cost += item.getManufacturingCost();
+		}
+		return cost;
+	}
+	
 	public int size() {
 		return items.size();
 	}

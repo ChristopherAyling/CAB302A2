@@ -136,6 +136,31 @@ public class StockTests {
 	}
 	
 	@Test
+	public void getWholesaleCostTestNoItems() {
+		assertEquals(0, stock.getWholesaleCost(), 0);
+	}
+	
+	@Test
+	public void getWholesaleCostTestSingleItem() {
+		stock.add(tempItem1);
+		assertEquals(tempItem1.getManufacturingCost(), stock.getWholesaleCost(), 0);
+	}
+	
+	@Test
+	public void getWholesaleCostTestMultiple() {
+		stock.add(tempItem1);
+		stock.add(tempItem1);
+		assertEquals(tempItem1.getManufacturingCost()*2, stock.getWholesaleCost(), 0);
+	}
+	
+	@Test
+	public void getWholesaleCostTestDifferent() {
+		stock.add(tempItem1);
+		stock.add(tempItem2);
+		assertEquals(tempItem1.getManufacturingCost()+tempItem2.getManufacturingCost(), stock.getWholesaleCost(), 0);
+	}
+	
+	@Test
 	public void toStringTest() {
 		String expected = "";
 		assertEquals(expected, stock.toString());

@@ -77,7 +77,7 @@ public class RefrigeratedTruck extends Truck {
 	 */
 	@Override
 	public double getCost() {
-		return 900.0 + (200*java.lang.Math.pow(0.7, (this.getTemperature()/5.0)));
+		return cargo.getWholesaleCost() + 900.0 + (200*java.lang.Math.pow(0.7, (this.getTemperature()/5.0)));
 	}
 	
 	

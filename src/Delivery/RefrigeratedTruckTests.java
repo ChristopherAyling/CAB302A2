@@ -137,7 +137,7 @@ public class RefrigeratedTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		assertEquals(900 + 200 * java.lang.Math.pow(0.7, truck.getTemperature() / 5), truck.getCost(), 0.001);  // when containing
+		assertEquals(cargo.getWholesaleCost() + 900 + 200 * java.lang.Math.pow(0.7, truck.getTemperature() / 5), truck.getCost(), 0.001);  // when containing
 	}
 
 }

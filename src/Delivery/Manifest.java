@@ -96,19 +96,6 @@ public class Manifest {
 			}
 		}//end while
 		trucks.add(currentOrdinaryTruck);
-
-//		Truck fridge = new RefrigeratedTruck();
-//		Truck ord = new OrdinaryTruck();
-//		for (Item item : inNeedOf.getItems()) {
-//			if (item.getTemperature() != null) {
-//				fridge.loadCargo(item);
-//			} else {
-//				ord.loadCargo(item);
-//			}
-//		}
-//		
-//		trucks.add(ord);
-//		trucks.add(fridge);
 	}
 	
 	
@@ -141,11 +128,11 @@ public class Manifest {
 			switch (line) { // make a truck
 			case ">Ordinary":
 				if (truck != null) trucks.add(truck);
-				truck = new RefrigeratedTruck();
+				truck = new OrdinaryTruck();
 				break;
 			case ">Refrigerated":
 				if (truck != null) trucks.add(truck);
-				truck = new OrdinaryTruck();
+				truck = new RefrigeratedTruck();
 				break;
 			default: // else add an item to a truck
 				if (truck == null) throw new CSVFormatException(); // why is there not a truck specified??
@@ -164,6 +151,7 @@ public class Manifest {
 			}// end switch
 		}//end while
 		bufferedReader.close();
+		System.out.println(this.toString());
 	}
 		
 	/**

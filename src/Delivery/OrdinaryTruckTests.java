@@ -192,7 +192,7 @@ public class OrdinaryTruckTests {
 		
 		truck.loadCargo(cargo);
 		
-		assertEquals(truck.getCost(), 750 + (0.25 * 500), 0.001);  // when containing
+		assertEquals(cargo.getWholesaleCost() + 750 + (0.25 * 500), truck.getCost(), 0.001);  // when containing
 	}
 
 }
