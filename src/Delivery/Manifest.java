@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -151,7 +152,6 @@ public class Manifest {
 			}// end switch
 		}//end while
 		bufferedReader.close();
-		System.out.println(this.toString());
 	}
 		
 	/**
@@ -174,6 +174,10 @@ public class Manifest {
 			cost += truck.getCost();
 		}
 		return cost;
+	}
+	
+	public String displayCost() {
+		return NumberFormat.getCurrencyInstance().format(getCost());
 	}
 	
 	public ArrayList<Truck> getTrucks(){

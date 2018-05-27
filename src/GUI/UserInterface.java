@@ -132,8 +132,9 @@ public class UserInterface {
 				String path = fd.getFile();
 				try {
 					Manifest manifest = new Manifest(store);
-					System.out.println(manifest.toString());
 					manifest.writeToCSV(path);
+					
+					JOptionPane.showMessageDialog(frame, "Manifest successfuly exported as " + path);
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(frame, "Error writing manifest to CSV", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (DeliveryException e2) {
@@ -162,10 +163,10 @@ public class UserInterface {
 					System.out.println(manifest.getCost());
 					store.addCapital(-manifest.getCost());
 					capitalLabel.setText("Capital: " + store.displayCapital());
-					// update item quantities in GUI
+					// TODO update item quantities in GUI
 					
 					frame.repaint();
-					JOptionPane.showMessageDialog(frame, "Manifest Successfully Loaded.\nTotal Price: $" + manifest.getCost());
+					JOptionPane.showMessageDialog(frame, "Manifest Successfully Loaded.\nTotal Price: " + manifest.displayCost());
 				} catch (IOException e3) {
 					JOptionPane.showMessageDialog(frame, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (CSVFormatException e3) {
@@ -173,11 +174,8 @@ public class UserInterface {
 				} catch (StockException e3) {
 					JOptionPane.showMessageDialog(frame, "Stock Exception, have item properties been loaded?", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (DeliveryException e1) {
-					System.out.println(e1.getMessage());
-					e1.printStackTrace();
 					JOptionPane.showMessageDialog(frame, "A delivery error occured.", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				System.out.println("manifest should've been loaded!");
 			}//end action performed
 		});
         
@@ -225,7 +223,6 @@ public class UserInterface {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("Main Started");
 		createAndShowGUI();
 	}
 
