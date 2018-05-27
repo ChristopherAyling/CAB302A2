@@ -3,8 +3,6 @@
  */
 package Stock;
 
-import java.util.OptionalDouble;
-
 public class Item {
 
 	private String name;
@@ -81,6 +79,11 @@ public class Item {
 	
 	public boolean equals(Object object) {
 		Item otherItem = (Item) object;
+		if (getName().equals(otherItem.getName())) {
+			return true;
+		}
+		else return false;
+		/*
 		if(this.getName() == otherItem.getName() && 
 				this.getManufacturingCost() == otherItem.getManufacturingCost() && 
 				this.getSellPrice() == otherItem.getSellPrice() && 
@@ -90,6 +93,7 @@ public class Item {
 			return true;
 		}
 		return false;
+		*/
 	}
 
 }

@@ -12,21 +12,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import java.util.Arrays;
-import java.util.EventListener;
-
 import Store.*;
 import Stock.*;
 import Delivery.*;
 
 import javax.swing.*;
-import javax.swing.plaf.metal.DefaultMetalTheme;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 /**
  * 

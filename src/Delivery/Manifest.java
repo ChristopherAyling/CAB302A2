@@ -43,28 +43,34 @@ public class Manifest {
 	 * @throws DeliveryException 
 	 */
 	public Manifest(Store store) throws DeliveryException {
-		// calculate needs
 		Stock current = store.getInventory();
 		Stock inNeedOf = new Stock();
 		Stock properties = store.getItemProperties();
-		for (Item item : properties.getItems()) {
-			if (current.count(item) <= item.getReorderPoint()) {
-				inNeedOf.add(item, item.getReorderAmount());
+		
+		// calculate needs
+		for (Item item : properties.getItems()) { // for every possible item
+			if (current.count(item) <= item.getReorderPoint()) { // if the amount of items in the inventory is less than the reorder point
+				System.out.println(item.getName() + "count: " + current.count(item) + " roa: " + item.getReorderAmount());
+				inNeedOf.add(item, item.getReorderAmount()); // add to inNeedOf
 			}
 		}
+		System.out.println(inNeedOf.toString());
+		
 		// TODO optimize shipment
 		Truck fridge = new RefrigeratedTruck();
 		Truck ord = new OrdinaryTruck();
 		for (Item item : inNeedOf.getItems()) {
-			if (item.getTemperature() < 10) {
+			if (item.getTemperature() != null) {
 				fridge.loadCargo(item);
 			} else {
 				ord.loadCargo(item);
 			}
 		}
+		
 		trucks.add(ord);
 		trucks.add(fridge);
 		
+		System.out.println(toString());
 	}
 	
 	/**

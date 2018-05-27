@@ -1,9 +1,6 @@
 package Stock;
 
-
 import static org.junit.Assert.*;
-
-import java.io.Console;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +43,8 @@ public class StockTests {
 		assertEquals(2, stock.count(tempItem1));
 		stock.add(tempItem1);
 		stock.add(tempItem2);
-		assertEquals(2, stock.count(tempItem1));
+		assertEquals(1, stock.count(tempItem2));
+		assertEquals(3, stock.count(tempItem1));
 	}
 	
 	@Test
@@ -80,7 +78,7 @@ public class StockTests {
 			assertNotNull(item);
 			c++;
 		}
-		assertEquals(2, c);
+		assertEquals(3, c);
 	}
 	
 	@Test
@@ -91,7 +89,7 @@ public class StockTests {
 	
 	@Test
 	public void getColdestItemNoItemsTest() {
-		assertEquals(stock.getColdestItemTemperature(), new Double(10.0));
+		assertEquals(stock.getColdestItemTemperature(), null);
 	}
 	
 	@Test
@@ -113,6 +111,23 @@ public class StockTests {
 		assertEquals(stock.getColdestItemTemperature(), tempItem3.getTemperature());
 	}
 	
+	@Test
+	public void toStringTest() {
+		String expected = "";
+		assertEquals(expected, stock.toString());
+		
+		stock.add(tempItem1);
+		expected = "" + tempItem1.getName() + "," + "1";
+		assertEquals(expected, stock.toString());
+		
+		stock.add(tempItem1);
+		expected = "" + tempItem1.getName() + "," + "2";
+		assertEquals(expected, stock.toString());
+		
+		stock.add(tempItem2);
+		expected = tempItem2.getName() + "," + "1\n" + tempItem1.getName() + "," + "2";
+		assertEquals(expected, stock.toString());
+	}
 
 	@Test
 	public void equalsTest() {
@@ -120,7 +135,6 @@ public class StockTests {
 		Stock s2 = new Stock();
 		s1.add(tempItem1);
 		s2.add(tempItem2);
-		
 		assertTrue(s1.equals(s1));
 		assertTrue(s1.equals(s2));
 		assertTrue(s2.equals(s1));

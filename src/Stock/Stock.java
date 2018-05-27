@@ -89,20 +89,25 @@ public class Stock {
 	 * @return String
 	 */
 	public String toString() {
-		String nl = "\n";
-		StringBuilder sb = new StringBuilder();
-		Map<String, Integer> itemCounts = new HashMap<String, Integer>();
-		for (Item item : items) {
-			itemCounts.put(item.getName(), count(item));
-//			itemCounts.put(item.getName(), itemCounts.get(item.getName())+1);
+		if (items.size() == 0) { // if no items
+			return "";
+			
+		} else {
+			Map<String, Integer> itemCounts = new HashMap<String, Integer>();
+			for (Item item : items) { // get counts of all items in stock
+				itemCounts.put(item.getName(), count(item));
+			}
+			
+			String nl = "\n";
+			StringBuilder sb = new StringBuilder();
+			for (String key : itemCounts.keySet()) { // create a representative string
+				sb.append(key);
+				sb.append(",");
+				sb.append(itemCounts.get(key));
+				sb.append(nl);
+			}
+			return sb.toString().substring(0, sb.length()-nl.length());
 		}
-		for (String key : itemCounts.keySet()) {
-			sb.append(key);
-			sb.append(",");
-			sb.append(itemCounts.get(key));
-			sb.append(nl);
-		}
-		return sb.toString();
 	}
 	
 }

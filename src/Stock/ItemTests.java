@@ -2,8 +2,6 @@ package Stock;
 
 import static org.junit.Assert.*;
 
-import java.util.OptionalInt;
-
 import org.junit.Test;
 
 public class ItemTests {
