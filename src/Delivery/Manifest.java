@@ -86,22 +86,7 @@ public class Manifest {
 					currentTruck = new RefrigeratedTruck(); // make a new one
 				}
 			} // end while
-		} // end while
-
-//		if (currentColdTruck.getCargo().size() != 0) {
-//			while (ordItems.size() > 0) {
-//				try {
-//					Item itemToAdd = ordItems.getItems().get(0);
-//					currentColdTruck.loadCargo(itemToAdd);
-//					ordItems.remove(itemToAdd, 1);
-//				} catch(DeliveryException e) {
-//					trucks.add(currentColdTruck);
-//					break;
-//				}
-//			}
-//			trucks.add(currentColdTruck);
-//		}
-		
+		} // end while	
 
 		while (ordItems.size() > 0) { // for every left over ordinary item
 			try { // try adding it to current truck

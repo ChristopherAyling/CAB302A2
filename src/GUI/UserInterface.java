@@ -84,9 +84,11 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent e) {
 				FileDialog fd = new FileDialog(frame, "Load item properties", FileDialog.LOAD);
 				fd.setVisible(true);
+				String path = fd.getFile();
+				if (path == null) return;
 				
 				try {
-					FileReader reader = new FileReader(fd.getFile());
+					FileReader reader = new FileReader(path);
 					BufferedReader bufferedReader = new BufferedReader(reader);
 					String line;
 					String[] propertiesList;
@@ -99,7 +101,7 @@ public class UserInterface {
 						case 6: // item with temperature
 							store.setItemProperties(new Item(propertiesList[0], Double.parseDouble(propertiesList[1]), Double.parseDouble(propertiesList[2]), Integer.parseInt(propertiesList[3]), Integer.parseInt(propertiesList[4]), Double.parseDouble(propertiesList[5])));
 							break;
-						default:
+						default: 
 							break;
 						}
 					}
@@ -136,6 +138,8 @@ public class UserInterface {
 				FileDialog fd = new FileDialog(frame, "Export Manifest", FileDialog.SAVE);
 				fd.setVisible(true);
 				String path = fd.getFile();
+				if (path == null) return;
+				
 				try {
 					Manifest manifest = new Manifest(store);
 					manifest.writeToCSV(path);
@@ -164,6 +168,7 @@ public class UserInterface {
 				FileDialog fd = new FileDialog(frame, "Load Manifest", FileDialog.LOAD);
 				fd.setVisible(true);
 				String path = fd.getFile();
+				if (path == null) return;
 				
 				try {
 					Manifest manifest = new Manifest(path);
