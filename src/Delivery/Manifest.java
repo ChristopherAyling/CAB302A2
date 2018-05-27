@@ -80,7 +80,7 @@ public class Manifest {
 		
 		//DEBUG
 		System.out.println(sortedFridgeItems.toString());
-		System.out.println("-----");
+		System.out.println("--Sorted fridge items ^^");
 		
 		
 		// Concat lists
@@ -93,8 +93,9 @@ public class Manifest {
 		
 		//DEBUG
 		System.out.println(inNeedOf.toString());
-		System.out.println("------");
+		System.out.println("--In need of ^^");
 		System.out.println(toRefill.toString());
+		System.out.println("--to Refill ^^");
 		
 		
 		Truck fridge = new RefrigeratedTruck();
@@ -202,10 +203,18 @@ public class Manifest {
 	 */
 	public String toString() {
 		StringBuilder manifestSB = new StringBuilder();
+		String nl = "\n";
 		Map<String, Integer> itemCounts = new HashMap<String, Integer>();
 		itemCounts.put("name", 7);
+		boolean firstTruck = true;
 		for (Truck truck : trucks) {
-			manifestSB.append(truck.toString());
+			if (firstTruck) {
+				manifestSB.append(truck.toString());
+				firstTruck = false;
+			} else {
+				manifestSB.append(nl);
+				manifestSB.append(truck.toString());
+			}
 		}//end for
 		return manifestSB.toString();
 	}

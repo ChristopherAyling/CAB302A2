@@ -69,13 +69,7 @@ public class StockTests {
 		stock.add(tempItem1);
 		stock.remove(tempItem1, 2);
 		assertEquals(2, stock.count(tempItem1));
-	}
-	
-	@Test(expected = StockException.class)
-	public void removeItemExceptionTest() {
-		stock.remove(tempItem1);
-	}
-	
+	}	
 	
 	@Test
 	public void iterTest() {
